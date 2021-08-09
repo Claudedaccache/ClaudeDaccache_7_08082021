@@ -36,6 +36,11 @@
   font-size: 1.1rem;
 }
 
+#seachIcon {
+  background-color: #ececec;
+  border: none;
+}
+
 #searchTags {
   width: 100%;
   display: -webkit-box;
@@ -62,7 +67,7 @@
 #ingredientsTags > div > button,
 #appareilTags > div > button,
 #ustensilesTags > div > button {
-  padding: 0.3rem 3rem 0.3rem 1rem;
+  padding: 0.4rem 3rem 0.4rem 1rem;
   pointer-events: none;
 }
 
@@ -73,12 +78,13 @@
 .closeTag {
   position: absolute;
   right: 0.5rem;
-  top: 0.2rem;
+  top: 0.3rem;
   font-size: 0.9rem;
-  padding: 00.1rem 4px 0 4px;
+  padding: 0.1rem 4px 0 4px;
   cursor: pointer !important;
   border: 2px solid white;
   border-radius: 50%;
+  font-size: 0.9rem;
 }
 
 #ingredientsSearch,

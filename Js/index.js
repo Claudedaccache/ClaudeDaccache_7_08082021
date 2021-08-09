@@ -64,8 +64,8 @@ function displayRecipes(container, recipes) {
         let ingSearchBar = document.querySelector(container)
         ingSearchBar.addEventListener("keyup", (e)=>{
         let ingSearchString = e.target.value.toLowerCase()
-        let filteredByIngredients = data.recipes.filter((recipe)=>{
-          return (recipe.ingredients.map((recipe)=>(recipe.ingredient))).includes(ingSearchString) 
+        let filteredByIngredients = data.recipes.map((recipe)=>{(recipe.ingredients.filter((recipe) =>{
+          return ((recipe.ingredient))}).includes(ingSearchString))
         })
         displayRecipes("#recipes", filteredByIngredients)  
        })

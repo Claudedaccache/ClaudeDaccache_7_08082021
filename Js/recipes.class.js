@@ -33,7 +33,7 @@ export class Recipes {
                 <ul class="recipeIngredients">
                   ${this.elt
                     .map((recipe) => { 
-                      return recipe.ingredients
+                      return this.ingredients
                         .map((ingredients) => {
                           return `<li><strong>${
                             ingredients.ingredient ? ingredients.ingredient : ""
