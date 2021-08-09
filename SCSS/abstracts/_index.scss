@@ -1,0 +1,130 @@
+
+/// main Search/// 
+ 
+  #mainSearchInput{
+    background-color: rgb(236, 236, 236);
+    border: none;
+  }
+
+  #mainSearchInput::placeholder{
+    font-size: 1.1rem;
+  }
+
+ ///  display of input ///
+#searchTags{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:flex-start;
+}
+
+#ingredientsTags > div,
+#appareilTags > div,
+#ustensilesTags> div  {
+margin: 0 1rem 0.5rem 0;
+display:inline-block;
+}
+
+#ingredientsTags > div > button,
+#appareilTags > div  > button,
+#ustensilesTags> div  > button {
+padding: 0.3rem 3rem 0.3rem 1rem;
+pointer-events: none;
+}
+.selectedTag{
+  position: relative;
+}
+
+.closeTag{
+position: absolute;
+right: 0.5rem;
+top: 0.2rem;
+font-size: 0.9rem;
+padding: 00.1rem 4px 0 4px;
+cursor: pointer !important;
+border: 2px solid white;
+border-radius: 50%;
+}
+
+/// secondarySearch ///
+
+#ingredientsSearch,
+#appareilSearch,
+#ustensilesSearch{
+  width: 18rem;
+  margin-right: 1rem;
+}
+
+#ingredientsSearch:focus{
+  max-width: 25rem;
+}
+
+#ingredientsSearchList, 
+#appareilSearchList, 
+#ustensilesSearchList{
+  transform: translate3d(0px, 36px, 0px) !important;
+  column-count: auto;
+}
+
+#ingredients::placeholder, 
+#appareil::placeholder,  
+#ustensiles::placeholder{ 
+  color: white;
+  opacity: 1; 
+}
+
+
+
+
+/// recipes section ///
+.card-body{
+  height: 15rem;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
+
+.card-title{
+  font-size: 1.2rem;
+}
+
+.repipeItem{
+margin:1rem;
+position: relative;
+
+}
+
+.recipeIngredients{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.recipeTimeSec i{
+font-size: 1.3rem;
+}
+
+.recipeTimeSec h6{
+  margin-left: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.recipeIngredients li{
+  font-size: 0.8rem;
+}
+
+.recipeDescription{
+  flex: 1;
+  max-height: 100%;
+}
+
+.recipeDescription p{
+  font-size:0.85rem;
+  line-height:100%;
+  font-weight: 500;
+  height: 100%;
+}
+
+
+

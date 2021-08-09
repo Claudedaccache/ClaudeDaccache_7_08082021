@@ -1,0 +1,23 @@
+{
+  "name": "les_petits_plats",
+  "description": "Utiliser Les petits plats pour trouver les meilleurs plats",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+},
+  "repository": {
+    "type": "git",
+    "url": "----"
+  },
+  "keywords": [],
+  "author": "Claude Daccache",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/"
+  },
+  "homepage": ""
+}
