@@ -20,6 +20,15 @@ function displayRecipes(container, recipes) {
     .join("")}`;
   }
 
+/// display message ///
+// displayRecipesMessage(".recipeMessage");
+
+// function displayRecipesMessage(container) {
+//   let recipeMessage = document.querySelector(container);
+//    recipeMessage.style.display ="flex"
+//   }
+
+
   /// filter recipes in main searchBar ///
   filterRecipesByInput ("#mainSearchInput");
 
@@ -27,7 +36,6 @@ function displayRecipes(container, recipes) {
   let searchBar = document.querySelector(container)
   searchBar.addEventListener("keyup", (e)=>{
     let searchString = e.target.value.toLowerCase()
-
     if (searchBar.value.length == "" || searchBar.value.length < 3) {
       displayRecipes("#recipes", data.recipes);}
     else{
@@ -35,6 +43,7 @@ function displayRecipes(container, recipes) {
           return recipe.name.toLowerCase().includes(searchString) || (recipe.ingredients.map((recipe)=>(recipe.ingredient))).includes(searchString) || recipe.description.toLowerCase().includes(searchString) 
         })   
         displayRecipes("#recipes", filteredRecipes)  
+
       }
    })
   }
@@ -199,9 +208,9 @@ function displayRecipesByUstensils (container){
  };
 
 
+let closeTag = document.querySelectorAll(".closeTag")
 
-
-
+console.log(closeTag);
 
 
 

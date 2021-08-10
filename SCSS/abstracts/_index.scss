@@ -60,19 +60,24 @@ font-size: 0.9rem;
 #ingredientsSearch,
 #appareilSearch,
 #ustensilesSearch{
-  width: 18rem;
+  width: 12rem;
   margin-right: 1rem;
 }
 
-#ingredientsSearch:focus{
-  max-width: 25rem;
-}
 
 #ingredientsSearchList, 
 #appareilSearchList, 
 #ustensilesSearchList{
   transform: translate3d(0px, 36px, 0px) !important;
-  column-count: auto;
+  column-count: 2;
+
+}
+
+#ingredientsSearch:focus-within, 
+#appareilSearch:focus-within, 
+#ustensilesSearch:focus-within{
+width: 30rem;
+
 }
 
 #ingredients::placeholder, 
@@ -84,17 +89,21 @@ font-size: 0.9rem;
 
 
 
-
 /// recipes section ///
+
+.card-img-top{
+  object-fit: cover;
+
+}
 .card-body{
   height: 15rem;
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
 } 
 
 .card-title{
   font-size: 1.2rem;
+  word-wrap: break-word;
 }
 
 .repipeItem{
@@ -123,15 +132,29 @@ font-size: 1.3rem;
 }
 
 .recipeDescription{
-  flex: 1;
-  max-height: 100%;
-}
+  position: relative;
+  height: 9rem;
 
+}
 .recipeDescription p{
   font-size:0.85rem;
   line-height:100%;
   font-weight: 500;
-  height: 100%;
+  
+}
+
+.recipeMessage{
+  width: 90%;
+  display: none;
+  min-height: 100vh;
+  flex-direction: row;
+  justify-content:center;
+  margin-top: 3rem;
+  align-items:flex-start;
+
+}
+.recipeMessage p{
+font-size: 2rem;
 }
 
 

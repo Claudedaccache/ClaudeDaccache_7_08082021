@@ -6,6 +6,14 @@
           box-sizing: border-box;
 }
 
+p,
+h1,
+h3,
+h2,
+a {
+  font-family: "Roboto", sans-serif;
+}
+
 #companyLogo {
   width: 35%;
   height: 100%;
@@ -90,12 +98,8 @@
 #ingredientsSearch,
 #appareilSearch,
 #ustensilesSearch {
-  width: 18rem;
+  width: 12rem;
   margin-right: 1rem;
-}
-
-#ingredientsSearch:focus {
-  max-width: 25rem;
 }
 
 #ingredientsSearchList,
@@ -103,8 +107,14 @@
 #ustensilesSearchList {
   -webkit-transform: translate3d(0px, 36px, 0px) !important;
           transform: translate3d(0px, 36px, 0px) !important;
-  -webkit-column-count: auto;
-          column-count: auto;
+  -webkit-column-count: 2;
+          column-count: 2;
+}
+
+#ingredientsSearch:focus-within,
+#appareilSearch:focus-within,
+#ustensilesSearch:focus-within {
+  width: 30rem;
 }
 
 #ingredients::-webkit-input-placeholder,
@@ -135,15 +145,19 @@
   opacity: 1;
 }
 
+.card-img-top {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .card-body {
   height: 15rem;
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .card-title {
   font-size: 1.2rem;
+  word-wrap: break-word;
 }
 
 .repipeItem {
@@ -171,17 +185,35 @@
 }
 
 .recipeDescription {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  max-height: 100%;
+  position: relative;
+  height: 9rem;
 }
 
 .recipeDescription p {
   font-size: 0.85rem;
   line-height: 100%;
   font-weight: 500;
-  height: 100%;
+}
+
+.recipeMessage {
+  width: 90%;
+  display: none;
+  min-height: 100vh;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 3rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.recipeMessage p {
+  font-size: 2rem;
 }
 
 #seachIcon {

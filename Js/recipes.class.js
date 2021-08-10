@@ -17,7 +17,7 @@ export class Recipes {
   displayRecipes(elt) {
     const repices = `
     <div class="col col-lg-4 col-md-6">
-      <div class="recipeItem card mb-4" >
+      <div class="recipeItem card mb-4">
         <img class="card-img-top" src="./image/recipes img.jpg" alt="Card image cap">
         <div class="card-body bg-light">
           <div class="d-flex justify-content-between">
