@@ -43,7 +43,6 @@ function displayRecipes(container, recipes) {
           return recipe.name.toLowerCase().includes(searchString) || (recipe.ingredients.map((recipe)=>(recipe.ingredient))).includes(searchString) || recipe.description.toLowerCase().includes(searchString) 
         })   
         displayRecipes("#recipes", filteredRecipes)  
-
       }
    })
   }
@@ -73,10 +72,11 @@ function displayRecipes(container, recipes) {
         let ingSearchBar = document.querySelector(container)
         ingSearchBar.addEventListener("keyup", (e)=>{
         let ingSearchString = e.target.value.toLowerCase()
-        let filteredByIngredients = data.recipes.map((recipe)=>{(recipe.ingredients.filter((recipe) =>{
-          return ((recipe.ingredient))}).includes(ingSearchString))
-        })
-        displayRecipes("#recipes", filteredByIngredients)  
+        let filteredByIngredients = data.recipes.filter(recipe => recipe.ingredients).map(recipe => {
+          return recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().includes(ingSearchString))})
+          console.log(filteredByIngredients);
+
+          displayRecipes("#recipes", filteredByIngredients)  
        })
       } 
       
@@ -126,7 +126,7 @@ let appareil = getAppareil(data.recipes);
       let appSearchBar = document.querySelector(container)
       appSearchBar.addEventListener("keyup", (e)=>{
       let appSearchString = e.target.value.toLowerCase()
-      let filteredByAppareil =  data.recipes.filter((recipe)=>{
+      let filteredByAppareil = data.recipes.filter((recipe)=>{
         return recipe.appliance.toLowerCase().includes(appSearchString) 
       })
       displayRecipes("#recipes", filteredByAppareil)  
@@ -180,9 +180,9 @@ function displayRecipesByUstensils (container){
     ustSearchBar.addEventListener("keyup", (e)=>{
     let ustSearchString = e.target.value.toLowerCase()
     console.log(ustSearchString);
-    let filteredByUstensil =  data.recipes.filter((recipe)=>{
-      return (recipe.ustensils.map((ustensils) =>{(ustensils)})).includes(ustSearchString)
-    })
+    let filteredByUstensil = data.recipes.filter(recipe => recipe.ustensils).map(recipe => {
+      return recipe.ustensils.map(ustensil => ustensil.toLowerCase().includes(ustSearchString))}) 
+   
     displayRecipes("#recipes", filteredByUstensil)
 
    })
@@ -208,22 +208,7 @@ function displayRecipesByUstensils (container){
  };
 
 
-let closeTag = document.querySelectorAll(".closeTag")
 
-console.log(closeTag);
-
-
-
-
-
-
-
-
-
-
-
- 
-   
 
 
 

@@ -12,6 +12,7 @@ export class Recipes {
     this.ustensils = elt.ustensils;
     this.ingredients = elt.ingredients;
 
+
   }
 
   displayRecipes(elt) {
@@ -31,18 +32,7 @@ export class Recipes {
             <div class="row">
               <div class="recipePreperation d-flex flex-column col col-6">
                 <ul class="recipeIngredients">
-                  ${this.elt
-                    .map((recipe) => { 
-                      return this.ingredients
-                        .map((ingredients) => {
-                          return `<li><strong>${
-                            ingredients.ingredient ? ingredients.ingredient : ""
-                          }:</strong> ${ingredients.quantity ? ingredients.quantity : ""}
-                          ${ingredients.unit ? ingredients.unit : ""}</li>`;
-                        })
-                        .join("");
-                    })
-                    .join("")}
+                ${this.displayIngredients()}
                </ul>
               </div>
               <div class="recipeDescription d-flex flex-column col col-6"> 
@@ -59,4 +49,19 @@ export class Recipes {
   `;
     return repices;
   }
+
+  displayIngredients(){
+    return data.recipes
+      .map((recipe) => { 
+        return this.ingredients
+          .map((ingredients) => {
+            return `<li><strong>${
+              ingredients.ingredient ? ingredients.ingredient : ""
+            }:</strong> ${ingredients.quantity ? ingredients.quantity : ""}
+            ${ingredients.unit ? ingredients.unit : ""}</li>`;
+          })
+          .join("");
+      })
+      .join("")}
+  
 }
