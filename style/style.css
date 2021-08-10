@@ -145,6 +145,10 @@ a {
   opacity: 1;
 }
 
+.card {
+  cursor: pointer;
+}
+
 .card-img-top {
   -o-object-fit: cover;
      object-fit: cover;
