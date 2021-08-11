@@ -10,12 +10,18 @@ export class Recipes {
     this.description = elt.description;
     this.appliance = elt.appliance;
     this.ustensils = elt.ustensils;
-    this.ingredients = elt.ingredient
+    this.ingredients = elt.ingredients
+      .map((recipe) => {
+        return `<li><strong>${
+          recipe.ingredient ? recipe.ingredient : ""
+        }: </strong>${recipe.quantity ? recipe.quantity : ""}
+                  ${recipe.unit ? recipe.unit : ""}</li>`;
+      })
+      .join("");
   }
 
   displayRecipes(elt) {
-    const repices = `
-    <div class="col col-lg-4 col-md-6">
+    const repices = ` <div class="col col-lg-4 col-md-6">
       <div class="recipeItem card mb-4">
         <img class="card-img-top" src="./image/recipes img.jpg" alt="Card image cap">
         <div class="card-body bg-light">
@@ -30,7 +36,7 @@ export class Recipes {
             <div class="row">
               <div class="recipePreperation d-flex flex-column col col-6">
                 <ul class="recipeIngredients">
-                ${this.displayIngredients()}
+                ${this.ingredients}
                </ul>
               </div>
               <div class="recipeDescription d-flex flex-column col col-6"> 
@@ -42,22 +48,9 @@ export class Recipes {
         </div>
       </div>
       </div>
+      </div>
   `;
     return repices;
   }
 
-  displayIngredients(){
-    return data.recipes
-      .map((recipe) => { 
-        return recipe.ingredients
-          .map((ingredients) => {
-            return `<li><strong>${
-              ingredients.ingredient ? ingredients.ingredient : ""
-            }:</strong> ${ingredients.quantity ? ingredients.quantity : ""}
-            ${ingredients.unit ? ingredients.unit : ""}</li>`;
-          })
-          .join("");
-      })
-      .join("")}
-  
 }

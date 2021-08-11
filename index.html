@@ -1,111 +1,189 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Utiliser Les petits plats pour trouver les meilleurs plats"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="./image/chef.svg" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/406da18a0b.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Utiliser Les petits plats pour trouver les meilleurs plats">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg" href="./image/chef.svg">
-  <link rel="stylesheet" href="./style/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
-  <script src="https://kit.fontawesome.com/406da18a0b.js" crossorigin="anonymous" defer></script>
+    <title>Les petits plats</title>
+  </head>
 
-  <title>Les petits plats</title>
-</head>
+  <body>
+    <header>
+      <div class="container" id="logoSec">
+        <a href="#index.html"
+          ><img
+            id="companyLogo"
+            src="./image/logo.png"
+            alt="logo"
+            class="rounded mx-auto d-block"
+          />
+        </a>
+      </div>
+    </header>
 
-<body>
-  <header>
-    <div class="container" id="logoSec">
-      <a href="#index.html"><img id="companyLogo" src="./image/logo.png" alt="logo" class="rounded mx-auto d-block">
-      </a>
-    </div>
-  </header>
+    <main class="container">
+      <!--input main search-->
 
-  <main class="container">
-
-    <!--input main search-->
-
-    <div class="container" id="mainSearch">
-      <div class="searchBar input-group my-3 d-flex">
-        <input type="search" id="mainSearchInput" class="form-control p-3 border btn-outline-0"
-          placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-label="search">
+      <div class="container" id="mainSearch">
+        <div class="searchBar input-group my-3 d-flex">
+          <input
+            type="search"
+            id="mainSearchInput"
+            class="form-control p-3 border btn-outline-0"
+            placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+            aria-label="search"
+          />
           <span><i class="fas fa-search" id="seachIcon"></i></span>
-      </div>
-    </div>
-
-    <!--display of searchInput -->
-    <section id="searchTags" class="container w-100">
-      <div id="ingredientsTags" class="d-flex flex-wrap ">
+        </div>
       </div>
 
-      <div id="appareilTags" class="d-flex flex-wrap ">
-      </div>
+      <!--display of searchInput -->
+      <section id="searchTags" class="container w-100">
+        <div id="ingredientsTags" class="d-flex flex-wrap"></div>
 
-      <div id="ustensilesTags" class="d-flex flex-wrap ">
-       </div>
-    </section>
+        <div id="appareilTags" class="d-flex flex-wrap"></div>
 
+        <div id="ustensilesTags" class="d-flex flex-wrap"></div>
+      </section>
 
-
-    <!--secondarySearchSection-->
-    <div class="container d-flex flex-wrap mt-2 mb-4" id="secondarySearch">
-      
-      <div class="input-group my-1" id="ingredientsSearch">
-          <input type="text" class="form-control bg-primary border-0 text-white" placeholder="Ingredients"
-            id="ingredients" aria-label="Text input with dropdown button">
-            <button class="btn btn-outline-secondary bg-primary dropdown-toggle dropdown-toggle-split border-primary text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-                <ul class="dropdown-menu dropdown-menu-end bg-primary border-primary w-100" id="ingredientsSearchList">
-                </ul>
-      </div>
-
-      <div class="input-group my-1" id="appareilSearch">
-        <input type="text" class="form-control bg-success border-0 text-white" placeholder="Appareil"
-          id="appareil" aria-label="Text input with dropdown button">
-          <button class="btn btn-outline-secondary bg-success dropdown-toggle dropdown-toggle-split border-success text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <!--secondarySearchSection-->
+      <div class="container d-flex flex-wrap mt-2 mb-4" id="secondarySearch">
+        <div class="input-group my-1" id="ingredientsSearch">
+          <input
+            type="text"
+            class="form-control bg-primary border-0 text-white"
+            placeholder="Ingredients"
+            id="ingredients"
+            aria-label="Text input with dropdown button"
+          />
+          <button
+            class="
+              btn btn-outline-secondary
+              bg-primary
+              dropdown-toggle dropdown-toggle-split
+              border-primary
+              text-white
+            "
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end bg-success border-success w-100 " id="appareilSearchList">
-          </ul>
-      </div>
+          <ul
+            class="
+              dropdown-menu dropdown-menu-end
+              bg-primary
+              border-primary
+              w-100
+            "
+            id="ingredientsSearchList"
+          ></ul>
+        </div>
 
-
-      <div class="input-group my-1" id="ustensilesSearch">
-        <input type="text" class="form-control bg-danger border-0 text-white" placeholder="Ustensiles"
-          id="ustensiles" autocomplete="on" aria-label="Text input with dropdown button">
-          <button class="btn btn-outline-secondary bg-danger dropdown-toggle dropdown-toggle-split border-danger text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="input-group my-1" id="appareilSearch">
+          <input
+            type="text"
+            class="form-control bg-success border-0 text-white"
+            placeholder="Appareil"
+            id="appareil"
+            aria-label="Text input with dropdown button"
+          />
+          <button
+            class="
+              btn btn-outline-secondary
+              bg-success
+              dropdown-toggle dropdown-toggle-split
+              border-success
+              text-white
+            "
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
-              <ul class="dropdown-menu dropdown-menu-end bg-danger border-danger w-100 flex-wrap" id="ustensilesSearchList">
-                </ul>
+          <ul
+            class="
+              dropdown-menu dropdown-menu-end
+              bg-success
+              border-success
+              w-100
+            "
+            id="appareilSearchList"
+          ></ul>
+        </div>
+
+        <div class="input-group my-1" id="ustensilesSearch">
+          <input
+            type="text"
+            class="form-control bg-danger border-0 text-white"
+            placeholder="Ustensiles"
+            id="ustensiles"
+            autocomplete="on"
+            aria-label="Text input with dropdown button"
+          />
+          <button
+            class="
+              btn btn-outline-secondary
+              bg-danger
+              dropdown-toggle dropdown-toggle-split
+              border-danger
+              text-white
+            "
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul
+            class="
+              dropdown-menu dropdown-menu-end
+              bg-danger
+              border-danger
+              w-100
+              flex-wrap
+            "
+            id="ustensilesSearchList"
+          ></ul>
+        </div>
       </div>
 
-     
-    </div>
+      <!--recipesSection-->
 
-    <!--recipesSection-->
-
-    <div class="container d-flex flex-wrap justify-content-between " >
-      <div class="row row-cols-1 row-cols-md-4" id="recipes">
-      
-    </div>
-    <div class="recipeMessage">
-      <p> Aucune recette ne correspond à votre critère… vous pouvez
-        chercher « tarte aux pommes », « poisson », etc.
-        </p>
-    </div>
-    </div>
-
-
-
-
-  </main>
-  <script src="./Js/index.js" type="module"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-</body>
-
+      <div class="container d-flex flex-wrap justify-content-between">
+        <div class="row row-cols-1 row-cols-md-4" id="recipes"></div>
+        <div class="recipeMessage">
+          <p>
+            Aucune recette ne correspond à votre critère… vous pouvez chercher «
+            tarte aux pommes », « poisson », etc.
+          </p>
+        </div>
+      </div>
+    </main>
+    <script src="./Js/index.js" type="module"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
