@@ -45,8 +45,16 @@ a {
 }
 
 #seachIcon {
-  background-color: #ececec;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
   border: none;
+  z-index: 100;
+}
+
+.searchBar {
+  position: relative;
 }
 
 #searchTags {
@@ -98,15 +106,15 @@ a {
 #ingredientsSearch,
 #appareilSearch,
 #ustensilesSearch {
-  width: 12rem;
+  width: 10rem;
   margin-right: 1rem;
 }
 
 #ingredientsSearchList,
 #appareilSearchList,
 #ustensilesSearchList {
-  -webkit-transform: translate3d(0px, 36px, 0px) !important;
-          transform: translate3d(0px, 36px, 0px) !important;
+  -webkit-transform: translate3d(0px, 28px, 0px) !important;
+          transform: translate3d(0px, 28px, 0px) !important;
   -webkit-column-count: 2;
           column-count: 2;
 }

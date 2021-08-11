@@ -11,11 +11,18 @@
   }
 
   #seachIcon{
-    background-color: rgb(236, 236, 236);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background:none;
     border: none;
-
-
+    z-index: 100;
   }
+
+.searchBar{
+  position: relative;
+}
+
 
  ///  display of input ///
 #searchTags{
@@ -60,7 +67,7 @@ font-size: 0.9rem;
 #ingredientsSearch,
 #appareilSearch,
 #ustensilesSearch{
-  width: 12rem;
+  width: 10rem;
   margin-right: 1rem;
 }
 
@@ -68,7 +75,7 @@ font-size: 0.9rem;
 #ingredientsSearchList, 
 #appareilSearchList, 
 #ustensilesSearchList{
-  transform: translate3d(0px, 36px, 0px) !important;
+  transform: translate3d(0px, 28px, 0px) !important;
   column-count: 2;
 
 }

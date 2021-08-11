@@ -10,9 +10,7 @@ export class Recipes {
     this.description = elt.description;
     this.appliance = elt.appliance;
     this.ustensils = elt.ustensils;
-    this.ingredients = elt.ingredients;
-
-
+    this.ingredients = elt.ingredient
   }
 
   displayRecipes(elt) {
@@ -36,9 +34,7 @@ export class Recipes {
                </ul>
               </div>
               <div class="recipeDescription d-flex flex-column col col-6"> 
-                <p class="card-description">${
-                  this.description
-                }
+                <p class="card-description">${this.description}
                 </p>
               </div>
             </div>
@@ -53,7 +49,7 @@ export class Recipes {
   displayIngredients(){
     return data.recipes
       .map((recipe) => { 
-        return this.ingredients
+        return recipe.ingredients
           .map((ingredients) => {
             return `<li><strong>${
               ingredients.ingredient ? ingredients.ingredient : ""

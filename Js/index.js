@@ -35,7 +35,8 @@ function displayRecipes(container, recipes) {
   function filterRecipesByInput(container){
   let searchBar = document.querySelector(container)
   searchBar.addEventListener("keyup", (e)=>{
-    let searchString = e.target.value.toLowerCase()
+    let searchString = e.target.value.toLowerCase().replace(/( )+/g," ")
+    console.log(searchString);
     if (searchBar.value.length == "" || searchBar.value.length < 3) {
       displayRecipes("#recipes", data.recipes);}
     else{
@@ -71,11 +72,10 @@ function displayRecipes(container, recipes) {
        function displayRecipesByIngredients (container){
         let ingSearchBar = document.querySelector(container)
         ingSearchBar.addEventListener("keyup", (e)=>{
-        let ingSearchString = e.target.value.toLowerCase()
+        let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g," ")
         let filteredByIngredients = data.recipes.filter(recipe => recipe.ingredients).map(recipe => {
           return recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().includes(ingSearchString))})
           console.log(filteredByIngredients);
-
           displayRecipes("#recipes", filteredByIngredients)  
        })
       } 
@@ -125,7 +125,7 @@ let appareil = getAppareil(data.recipes);
     function displayRecipesByAppareil (container){
       let appSearchBar = document.querySelector(container)
       appSearchBar.addEventListener("keyup", (e)=>{
-      let appSearchString = e.target.value.toLowerCase()
+      let appSearchString = e.target.value.toLowerCase().replace(/( )+/g," ")
       let filteredByAppareil = data.recipes.filter((recipe)=>{
         return recipe.appliance.toLowerCase().includes(appSearchString) 
       })
@@ -178,7 +178,7 @@ function displayUstensiles(container, filteredUstensils){
 function displayRecipesByUstensils (container){
     let ustSearchBar = document.querySelector(container)
     ustSearchBar.addEventListener("keyup", (e)=>{
-    let ustSearchString = e.target.value.toLowerCase()
+    let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g," ")
     console.log(ustSearchString);
     let filteredByUstensil = data.recipes.filter(recipe => recipe.ustensils).map(recipe => {
       return recipe.ustensils.map(ustensil => ustensil.toLowerCase().includes(ustSearchString))}) 
@@ -206,9 +206,6 @@ function displayRecipesByUstensils (container){
      })
     });
  };
-
-
-
 
 
 
