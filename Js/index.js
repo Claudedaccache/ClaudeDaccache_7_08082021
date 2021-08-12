@@ -18,18 +18,20 @@ function displayRecipes(container, recipes) {
     .join("")}`;
 }
 
-
 /// filter recipes in main searchBar ///
 filterRecipesByInput("#mainSearchInput");
 
 function filterRecipesByInput(container) {
+  let errorMessage = document.querySelector(".recipeMessage");
+  let recipesContainer = document.querySelector("#recipes");
   let searchBar = document.querySelector(container);
   searchBar.addEventListener("keyup", (e) => {
     let searchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    console.log(searchString);
     if (searchBar.value.length == "" || searchBar.value.length < 3) {
+      errorMessage.style.display = "none";
       displayRecipes("#recipes", data.recipes);
     } else {
+      errorMessage.style.display = "none";
       let filteredRecipes = data.recipes.filter((recipe) => {
         return (
           recipe.name.toLowerCase().includes(searchString) ||
@@ -39,8 +41,9 @@ function filterRecipesByInput(container) {
           recipe.description.toLowerCase().includes(searchString)
         );
       });
-      console.log(filteredRecipes);
-      displayRecipes("#recipes", filteredRecipes);
+      recipesContainer.childNodes.length > 0
+        ? displayRecipes("#recipes", filteredRecipes)
+        : (errorMessage.style.display = "flex");
     }
   });
 }
@@ -135,6 +138,7 @@ function displayRecipesByAppareil(container) {
     let filteredByAppareil = data.recipes.filter((recipe) => {
       return recipe.appliance.toLowerCase().includes(appSearchString);
     });
+    console.log(filteredByAppareil);
     displayRecipes("#recipes", filteredByAppareil);
   });
 }
@@ -216,46 +220,3 @@ function dropDownSelectedUstensils(ustList) {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let xx = `${data.recipes
-//   .map((recipe) => {
-//     recipe.ingredients
-//       .map((ingredients) => {
-//         let recipeIng = `<li><strong>${
-//           ingredients.ingredient ? ingredients.ingredient : ""
-//         }:</strong>${ingredients.quantity ? ingredients.quantity : ""}${
-//           ingredients.unit ? ingredients.unit : ""
-//         }</li>`;
-//         console.log(recipeIng);
-//       })
-//       .join("");
-//   })
-//   .join("")}`;
-// console.log(xx);
-
-// let xx = `${data.recipes
-//   .map((recipe) => {
-//     console.log(recipe.ustensils);
-//     recipe.ustensils
-//       .map((ustensil) => {
-//            console.log(ustensil);
-//       })
-//       .join("");
-//   })
-//   .join("")}`;
-// console.log(xx);

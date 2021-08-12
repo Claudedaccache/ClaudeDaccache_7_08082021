@@ -156,7 +156,7 @@ a {
 }
 
 .card-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   max-width: 250px;
@@ -170,6 +170,11 @@ a {
 .recipeIngredients {
   list-style-type: none;
   padding-left: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recipeTimeSec i {
