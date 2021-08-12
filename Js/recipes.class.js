@@ -14,7 +14,7 @@ export class Recipes {
       .map((recipe) => {
         return `<li><strong>${
           recipe.ingredient ? recipe.ingredient : ""
-        }: </strong>${recipe.quantity ? recipe.quantity : ""}
+        }: </strong> ${recipe.quantity ? recipe.quantity : ""}
                   ${recipe.unit ? recipe.unit : ""}</li>`;
       })
       .join("");
@@ -29,7 +29,7 @@ export class Recipes {
             <h5 class="card-title" data-appliances="${this.appliance}" data-ustensils="${this.ustensils}">${this.name}</h5>
             <div class="recipeTimeSec d-flex">
               <i class="far fa-clock"></i>
-              <h6 class="recipeTime card-text">${this.time} min</h6>
+              <h5 class="recipeTime card-text">${this.time} min</h5>
             </div>
           </div>
           <div class="d-flex justify-content-between mt-2">
@@ -40,8 +40,7 @@ export class Recipes {
                </ul>
               </div>
               <div class="recipeDescription d-flex flex-column col col-6"> 
-                <p class="card-description">${this.description}
-                </p>
+                <p class="card-description">${this.description}</p>
               </div>
             </div>
           </div>

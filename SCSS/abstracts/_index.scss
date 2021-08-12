@@ -97,13 +97,14 @@
 }
 
 .card-body {
-  height: 15rem;
-  overflow: hidden;
+  height: 14rem;
+  // overflow: hidden;
 }
 
 .card-title {
-  font-size: 1.2rem;
-  word-wrap: break-word;
+  font-size: 1.1rem;
+  flex-wrap: wrap;
+  max-width: 250px;
 }
 
 .repipeItem {
@@ -120,10 +121,10 @@
   font-size: 1.3rem;
 }
 
-.recipeTimeSec h6 {
+.recipeTimeSec h5 {
   margin-left: 0.5rem;
   font-weight: bold;
-  font-size: 1.1rem;
+  
 }
 
 .recipeIngredients li {
@@ -134,13 +135,16 @@
   position: relative;
   height: 9rem;
 }
+
 .card-description {
   font-size: 0.85rem;
   line-height: 100%;
   font-weight: 500;
-  // text-overflow: ellipsis;
-  // overflow: hidden;
-  // white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recipeMessage {
