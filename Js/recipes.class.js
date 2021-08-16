@@ -14,7 +14,7 @@ export class Recipes {
       .map((recipe) => {
         return `<li><strong>${
           recipe.ingredient ? recipe.ingredient : ""
-        }: </strong>${recipe.quantity ? recipe.quantity : ""}
+        }</strong>${recipe.quantity ? ": " + recipe.quantity : ""}
                   ${recipe.unit ? recipe.unit : ""}</li>`;
       })
       .join("");

@@ -88,6 +88,11 @@
 
 .card {
   cursor: pointer;
+  box-shadow: 3px 3px 5px rgb(131, 131, 131);
+}
+
+.card:hover{
+  transform: scale(1.05)
 }
 
 .card-body {
@@ -159,3 +164,5 @@
 .recipeMessage p {
   font-size: 2rem;
 }
+
+

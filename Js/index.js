@@ -19,9 +19,10 @@ function displayRecipes(container, recipes) {
 }
 
 /// filter recipes in main searchBar ///
-filterRecipesByInput("#mainSearchInput");
+filterRecipesInMainSearch("#mainSearchInput");
+let filteredRecipes;
 
-function filterRecipesByInput(container) {
+function filterRecipesInMainSearch(container) {
   let errorMessage = document.querySelector(".recipeMessage");
   let recipesContainer = document.querySelector("#recipes");
   let searchBar = document.querySelector(container);
@@ -32,7 +33,7 @@ function filterRecipesByInput(container) {
       displayRecipes("#recipes", data.recipes);
     } else {
       errorMessage.style.display = "none";
-      let filteredRecipes = data.recipes.filter((recipe) => {
+      filteredRecipes = data.recipes.filter((recipe) => {
         return (
           recipe.name.toLowerCase().includes(searchString) ||
           recipe.ingredients
@@ -41,6 +42,7 @@ function filterRecipesByInput(container) {
           recipe.description.toLowerCase().includes(searchString)
         );
       });
+      console.log(filteredRecipes);
       recipesContainer.childNodes.length > 0
         ? displayRecipes("#recipes", filteredRecipes)
         : (errorMessage.style.display = "flex");
@@ -77,13 +79,12 @@ function displayRecipesByIngredients(container) {
   let ingSearchBar = document.querySelector(container);
   ingSearchBar.addEventListener("keyup", (e) => {
     let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    let filteredByIngredients = data.recipes
-      .filter((recipe) => recipe.ingredients)
-      .map((recipe) => {
-        return recipe.ingredients.map((ingredient) =>
-          ingredient.ingredient.toLowerCase().includes(ingSearchString)
-        );
-      });
+    let filteredByIngredients = filteredRecipes.filter((recipe) =>
+      recipe.ingredients.map((recipeIng) => {
+        return recipeIng.includes(ingSearchString);
+      })
+    );
+
     console.log(filteredByIngredients);
     displayRecipes("#recipes", filteredByIngredients);
   });
@@ -91,6 +92,7 @@ function displayRecipesByIngredients(container) {
 
 function dropDownSelectedIngredients(ingList) {
   let recipeIng = document.querySelectorAll(ingList);
+  filterRecipesInMainSearch("#ingredients");
   recipeIng.forEach((ingredient) => {
     ingredient.addEventListener("click", (e) => {
       let targetedIng = e.target.dataset.tag.toLowerCase();
@@ -135,7 +137,7 @@ function displayRecipesByAppareil(container) {
   let appSearchBar = document.querySelector(container);
   appSearchBar.addEventListener("keyup", (e) => {
     let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    let filteredByAppareil = data.recipes.filter((recipe) => {
+    let filteredByAppareil = filteredRecipes.filter((recipe) => {
       return recipe.appliance.toLowerCase().includes(appSearchString);
     });
     console.log(filteredByAppareil);
@@ -145,7 +147,7 @@ function displayRecipesByAppareil(container) {
 
 function dropDownSelectedAppareil(appList) {
   let recipeApp = document.querySelectorAll(appList);
-  filterRecipesByInput("#appareil");
+  filterRecipesInMainSearch("#appareil");
   recipeApp.forEach((appareil) => {
     appareil.addEventListener("click", (e) => {
       let targetedApp = e.target.dataset.tag.toLowerCase();
@@ -190,7 +192,7 @@ function displayRecipesByUstensils(container) {
   ustSearchBar.addEventListener("keyup", (e) => {
     let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     console.log(ustSearchString);
-    let filteredByUstensil = data.recipes
+    let filteredByUstensil = filteredRecipes
       .filter((recipe) => recipe.ustensils)
       .map((recipe) => {
         return recipe.ustensils.map((ustensil) =>
@@ -204,7 +206,7 @@ function displayRecipesByUstensils(container) {
 
 function dropDownSelectedUstensils(ustList) {
   let recipeUst = document.querySelectorAll(ustList);
-  filterRecipesByInput("#ustensiles");
+  filterRecipesInMainSearch("#ustensiles");
   recipeUst.forEach((ustensil) => {
     ustensil.addEventListener("click", (e) => {
       let targetedUst = e.target.dataset.tag.toLowerCase();
@@ -219,4 +221,3 @@ function dropDownSelectedUstensils(ustList) {
     });
   });
 }
-
