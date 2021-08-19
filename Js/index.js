@@ -185,26 +185,30 @@ dropDownSelectedItems(
   "#ustensilesTags"
 );
 
+
 /// make visible and invisible the dropdownlist ///
 
-visibleDropdownList("#ingredientsSearchList");
-visibleDropdownList("#appareilSearchList");
-visibleDropdownList("#ustensilesSearchList");
 
-function visibleDropdownList(container) {
-  let dropContainer = document.querySelector(container);
+function manageDropdownVisibility(inputContainer, itemList){
+  let container = document.querySelector(inputContainer);
+  let dropContainer = document.querySelector(itemList);
+  container.addEventListener("input", ()=>{
+    if(container.value.length > 0){
+      dropContainer.style.display = "block";
+    }
+    else if (container.value.length == 0){
+      dropContainer.style.display = "";
+    }
+  })
+  window.addEventListener("mouseup", (e)=>{
+    if (!dropContainer.contains(e.target)) {
+      dropContainer.style.display = "";
+  }
+  })
 
-  dropContainer.classList.remove("invisible");
-  dropContainer.classList.add("visible");
 }
 
-function InvisibleDropdownList(container) {
-  let dropContainer = document.querySelector(container);
-
-  dropContainer.classList.remove("visible");
-  dropContainer.classList.add("invisible");
-}
-
+/// empty all containers to be filled by slected recipes ///
 function emptyAll() {
   appareilSearchList.innerHTML = "";
   ingredientsSearchList.innerHTML = "";
@@ -217,6 +221,7 @@ displayRecipesByIngredients("#ingredients", data.recipes);
 function displayRecipesByIngredients(container, remainingRecipes) {
   let ingSearchBar = document.querySelector(container);
   ingSearchBar.addEventListener("keyup", (e) => {
+    manageDropdownVisibility("#ingredients" ,"#ingredientsSearchList")
     let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByIngredients = remainingRecipes.filter((recipe) => {
       if (ingredientsUsedInRecipe(ingSearchString, recipe)) {
@@ -236,6 +241,7 @@ displayRecipesByAppareil("#appareil", data.recipes);
 function displayRecipesByAppareil(container, remainingRecipes) {
   let appSearchBar = document.querySelector(container);
   appSearchBar.addEventListener("keyup", (e) => {
+    manageDropdownVisibility("#appareil" ,"#appareilSearchList")
     let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByAppareil = remainingRecipes.filter((recipe) => {
       if (recipe.appliance.toLowerCase().includes(appSearchString)) {
@@ -254,6 +260,7 @@ displayRecipesByUstensils("#ustensiles", data.recipes);
 function displayRecipesByUstensils(container, remainingRecipes) {
   let ustSearchBar = document.querySelector(container);
   ustSearchBar.addEventListener("keyup", (e) => {
+    manageDropdownVisibility("#ustensiles" ,"#ustensilesSearchList")
     let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByUstensil = remainingRecipes.filter((recipe) => {
       let joinedUstensils = recipe.ustensils.join(" ");
