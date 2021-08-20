@@ -50,7 +50,7 @@ function filterAllRecipesInMainSearch() {
       getUniqueItems(data.recipes);
     } else {
       removeErrorMessage(".recipeMessage");
-      recipesContainer.childNodes.length > 0
+        recipesContainer.childNodes.length > 0
         ? displayRecipes("#recipes", recipeFiltered(searchString))
         : addErrorMessage(".recipeMessage");
     }
@@ -137,7 +137,8 @@ function getUniqueItems(MainSearchResult) {
       (item) =>
         (itemList.innerHTML += `<li><a class="${itemClass} dropdown-item text-white" data-tag="${item}" href="#">${item}</a></li>`)
     );
-  }
+}
+
 
   displayItemsInDropDown(appareilSearchList, arrayAppareil, "recipeApp");
   displayItemsInDropDown(ingredientsSearchList, arrayIngredients, "recipeIng");
@@ -157,11 +158,11 @@ function dropDownSelectedItems(
       let targetedItem = e.target.dataset.tag.toLowerCase();
       let itemTagList = document.querySelector(tagContainer);
       itemTagList.innerHTML += `
-             <div class="selectedTag ${itemColorClass} text-white rounded mr-2 rounded">
-             <button type="button" class="${itemTypeClass} close border-0 rounded ${itemColorClass} text-white" aria-label="Close">${targetedItem}
-             </button>
-             <span aria-hidden="true" class="closeTag"><i class="fas fa-times"></i></span>
-           </div>`;
+            <div class="selectedTag ${itemColorClass} text-white rounded mr-2 rounded">
+            <button type="button" class="${itemTypeClass} close border-0 rounded ${itemColorClass} text-white" aria-label="Close">${targetedItem}
+            </button>
+            <span aria-hidden="true" class="closeTag"><i class="fas fa-times"></i></span>
+          </div>`;
     });
   });
 }
@@ -185,27 +186,23 @@ dropDownSelectedItems(
   "#ustensilesTags"
 );
 
-
 /// make visible and invisible the dropdownlist ///
 
-
-function manageDropdownVisibility(inputContainer, itemList){
+function manageDropdownVisibility(inputContainer, itemList) {
   let container = document.querySelector(inputContainer);
   let dropContainer = document.querySelector(itemList);
-  container.addEventListener("input", ()=>{
-    if(container.value.length > 0){
+  container.addEventListener("input", () => {
+    if (container.value.length > 0) {
       dropContainer.style.display = "block";
-    }
-    else if (container.value.length == 0){
+    } else if (container.value.length == 0) {
       dropContainer.style.display = "";
     }
-  })
-  window.addEventListener("mouseup", (e)=>{
+  });
+  window.addEventListener("mouseup", (e) => {
     if (!dropContainer.contains(e.target)) {
       dropContainer.style.display = "";
-  }
-  })
-
+    }
+  });
 }
 
 /// empty all containers to be filled by slected recipes ///
@@ -221,8 +218,8 @@ displayRecipesByIngredients("#ingredients", data.recipes);
 function displayRecipesByIngredients(container, remainingRecipes) {
   let ingSearchBar = document.querySelector(container);
   ingSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#ingredients" ,"#ingredientsSearchList")
-    let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
+    manageDropdownVisibility("#ingredients", "#ingredientsSearchList");
+    let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ")
     let filteredByIngredients = remainingRecipes.filter((recipe) => {
       if (ingredientsUsedInRecipe(ingSearchString, recipe)) {
         return recipe;
@@ -241,7 +238,7 @@ displayRecipesByAppareil("#appareil", data.recipes);
 function displayRecipesByAppareil(container, remainingRecipes) {
   let appSearchBar = document.querySelector(container);
   appSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#appareil" ,"#appareilSearchList")
+    manageDropdownVisibility("#appareil", "#appareilSearchList");
     let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByAppareil = remainingRecipes.filter((recipe) => {
       if (recipe.appliance.toLowerCase().includes(appSearchString)) {
@@ -260,7 +257,7 @@ displayRecipesByUstensils("#ustensiles", data.recipes);
 function displayRecipesByUstensils(container, remainingRecipes) {
   let ustSearchBar = document.querySelector(container);
   ustSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#ustensiles" ,"#ustensilesSearchList")
+    manageDropdownVisibility("#ustensiles", "#ustensilesSearchList");
     let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByUstensil = remainingRecipes.filter((recipe) => {
       let joinedUstensils = recipe.ustensils.join(" ");

@@ -69,6 +69,12 @@
   margin-right: 1rem;
 }
 
+#ingredientsSearch:focus-within,
+#appareilSearch:focus-within,
+#ustensilesSearch:focus-within {
+  width: 19rem;
+}
+
 #ingredientsSearchList,
 #appareilSearchList,
 #ustensilesSearchList {
