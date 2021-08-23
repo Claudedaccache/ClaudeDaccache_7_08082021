@@ -30,9 +30,24 @@ function recipeFiltered(search) {
   });
   emptyAll();
   getUniqueItems(filteredRecipes);
-  displayRecipesByIngredients("#ingredients", filteredRecipes);
-  displayRecipesByAppareil("#appareil", filteredRecipes);
-  displayRecipesByUstensils("#ustensiles", filteredRecipes);
+  dropDownSelectedItems(
+    ".recipeIng",
+    "bg-primary",
+    "ingredientsTagList",
+    "#ingredientsTags"
+  );
+  dropDownSelectedItems(
+    ".recipeApp",
+    "bg-success",
+    "appareilTagList",
+    "#appareilTags"
+  );
+  dropDownSelectedItems(
+    ".recipeUst",
+    "bg-danger",
+    "ustensilTagList",
+    "#ustensilesTags"
+  );
   return filteredRecipes;
 }
 
@@ -50,7 +65,7 @@ function filterAllRecipesInMainSearch() {
       getUniqueItems(data.recipes);
     } else {
       removeErrorMessage(".recipeMessage");
-        recipesContainer.childNodes.length > 0
+      recipesContainer.childNodes.length > 0
         ? displayRecipes("#recipes", recipeFiltered(searchString))
         : addErrorMessage(".recipeMessage");
     }
@@ -137,15 +152,113 @@ function getUniqueItems(MainSearchResult) {
       (item) =>
         (itemList.innerHTML += `<li><a class="${itemClass} dropdown-item text-white" data-tag="${item}" href="#">${item}</a></li>`)
     );
-}
+  }
 
-
-  displayItemsInDropDown(appareilSearchList, arrayAppareil, "recipeApp");
   displayItemsInDropDown(ingredientsSearchList, arrayIngredients, "recipeIng");
+  displayItemsInDropDown(appareilSearchList, arrayAppareil, "recipeApp");
   displayItemsInDropDown(ustensilesSearchList, arrayUstensils, "recipeUst");
+
+  displayRecipesByIngredients("#ingredients", arrayIngredients);
+  displayRecipesByAppareil("#appareil", arrayAppareil);
+  displayRecipesByUstensils("#ustensiles", arrayUstensils);
+
+  function displayRecipesByIngredients(container, arrayIngredients) {
+    let ingSearchBar = document.querySelector(container);
+    ingSearchBar.addEventListener("keyup", (e) => {
+      manageDropdownVisibility("#ingredients", "#ingredientsSearchList");
+      let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
+      let filteredByIngredients = arrayIngredients.filter((recipe) => {
+        if (recipe.toLowerCase().includes(ingSearchString)) {
+          return recipe;
+        }
+      });
+      emptyAll();
+      displayItemsInDropDown(
+        ingredientsSearchList,
+        filteredByIngredients,
+        "recipeIng"
+      );
+      dropDownSelectedItems(
+        ".recipeIng",
+        "bg-primary",
+        "ingredientsTagList",
+        "#ingredientsTags"
+      );
+    });
+  }
+
+  function displayRecipesByAppareil(container, arrayAppareil) {
+    let appSearchBar = document.querySelector(container);
+    appSearchBar.addEventListener("keyup", (e) => {
+      manageDropdownVisibility("#appareil", "#appareilSearchList");
+      let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
+      let filteredByAppareil = arrayAppareil.filter((recipe) => {
+        if (recipe.toLowerCase().includes(appSearchString)) {
+          return recipe;
+        }
+      });
+      emptyAll();
+      displayItemsInDropDown(
+        appareilSearchList,
+        filteredByAppareil,
+        "recipeApp"
+      );
+      dropDownSelectedItems(
+        ".recipeApp",
+        "bg-success",
+        "appareilTagList",
+        "#appareilTags"
+      );
+    });
+  }
+
+  function displayRecipesByUstensils(container, arrayUstensils) {
+    let ustSearchBar = document.querySelector(container);
+    ustSearchBar.addEventListener("keyup", (e) => {
+      manageDropdownVisibility("#ustensiles", "#ustensilesSearchList");
+      let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
+      let filteredByUstensil = arrayUstensils.filter((recipe) => {
+        if (recipe.toLowerCase().includes(ustSearchString)) {
+          return recipe;
+        }
+      });
+      emptyAll();
+      displayItemsInDropDown(
+        ustensilesSearchList,
+        filteredByUstensil,
+        "recipeUst"
+      );
+      dropDownSelectedItems(
+        ".recipeUst",
+        "bg-danger",
+        "ustensilTagList",
+        "#ustensilesTags"
+      );
+    });
+  }
 }
 
 /// display selected ingredients as a tag ///
+
+dropDownSelectedItems(
+  ".recipeIng",
+  "bg-primary",
+  "ingredientsTagList",
+  "#ingredientsTags"
+);
+dropDownSelectedItems(
+  ".recipeApp",
+  "bg-success",
+  "appareilTagList",
+  "#appareilTags"
+);
+dropDownSelectedItems(
+  ".recipeUst",
+  "bg-danger",
+  "ustensilTagList",
+  "#ustensilesTags"
+);
+
 function dropDownSelectedItems(
   eltList,
   itemColorClass,
@@ -167,25 +280,6 @@ function dropDownSelectedItems(
   });
 }
 
-dropDownSelectedItems(
-  ".recipeIng",
-  "bg-primary",
-  "ingredientsTagList",
-  "#ingredientsTags"
-);
-dropDownSelectedItems(
-  ".recipeApp",
-  "bg-success",
-  "appareilTagList",
-  "#appareilTags"
-);
-dropDownSelectedItems(
-  ".recipeUst",
-  "bg-danger",
-  "ustensilTagList",
-  "#ustensilesTags"
-);
-
 /// make visible and invisible the dropdownlist ///
 
 function manageDropdownVisibility(inputContainer, itemList) {
@@ -205,66 +299,9 @@ function manageDropdownVisibility(inputContainer, itemList) {
   });
 }
 
-/// empty all containers to be filled by slected recipes ///
+/// empty all containers to be filled by selected recipes ///
 function emptyAll() {
   appareilSearchList.innerHTML = "";
   ingredientsSearchList.innerHTML = "";
   ustensilesSearchList.innerHTML = "";
-}
-
-/// filter the remaining recipes from the main search according to the ingredient///
-displayRecipesByIngredients("#ingredients", data.recipes);
-
-function displayRecipesByIngredients(container, remainingRecipes) {
-  let ingSearchBar = document.querySelector(container);
-  ingSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#ingredients", "#ingredientsSearchList");
-    let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ")
-    let filteredByIngredients = remainingRecipes.filter((recipe) => {
-      if (ingredientsUsedInRecipe(ingSearchString, recipe)) {
-        return recipe;
-      }
-    });
-    emptyAll();
-    getUniqueItems(filteredByIngredients);
-    displayRecipes("#recipes", filteredByIngredients);
-  });
-}
-
-/// filter the remaining recipes from the main search according to the appliance///
-
-displayRecipesByAppareil("#appareil", data.recipes);
-
-function displayRecipesByAppareil(container, remainingRecipes) {
-  let appSearchBar = document.querySelector(container);
-  appSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#appareil", "#appareilSearchList");
-    let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    let filteredByAppareil = remainingRecipes.filter((recipe) => {
-      if (recipe.appliance.toLowerCase().includes(appSearchString)) {
-        return recipe;
-      }
-    });
-    emptyAll();
-    getUniqueItems(filteredByAppareil);
-    displayRecipes("#recipes", filteredByAppareil);
-  });
-}
-
-/// filter the remaining recipes from the main search according to the ustensiles///
-displayRecipesByUstensils("#ustensiles", data.recipes);
-
-function displayRecipesByUstensils(container, remainingRecipes) {
-  let ustSearchBar = document.querySelector(container);
-  ustSearchBar.addEventListener("keyup", (e) => {
-    manageDropdownVisibility("#ustensiles", "#ustensilesSearchList");
-    let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    let filteredByUstensil = remainingRecipes.filter((recipe) => {
-      let joinedUstensils = recipe.ustensils.join(" ");
-      return joinedUstensils.includes(ustSearchString.toLowerCase());
-    });
-    emptyAll();
-    getUniqueItems(filteredByUstensil);
-    displayRecipes("#recipes", filteredByUstensil);
-  });
 }
