@@ -1,3 +1,12 @@
-@media screen and (min-width: 370px) {}
+@media screen and (max-width: 575px) {
+
+  #ingredientsSearchList,
+  #appareilSearchList,
+  #ustensilesSearchList {
+    transform: translate3d(0px, 36px, 0px) !important;
+    column-count: 1;
+  }
+  
+}
   
   

@@ -113,7 +113,7 @@ a {
 #ingredientsSearch:focus-within,
 #appareilSearch:focus-within,
 #ustensilesSearch:focus-within {
-  width: 19rem;
+  width: 30rem;
 }
 
 #ingredientsSearchList,
@@ -121,8 +121,8 @@ a {
 #ustensilesSearchList {
   -webkit-transform: translate3d(0px, 36px, 0px) !important;
           transform: translate3d(0px, 36px, 0px) !important;
-  -webkit-column-count: auto;
-          column-count: auto;
+  -webkit-column-count: 3;
+          column-count: 3;
 }
 
 #ingredients::-webkit-input-placeholder,
@@ -151,6 +151,14 @@ a {
 #ustensiles::placeholder {
   color: white;
   opacity: 1;
+}
+
+.dropdown-menu li, .dropdown-menu li a {
+  white-space: normal;
+  float: left;
+  width: 100%;
+  height: auto;
+  word-wrap: break-word;
 }
 
 .card {
@@ -244,5 +252,16 @@ a {
   background-color: #e6e6e6;
   cursor: pointer;
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 575px) {
+  #ingredientsSearchList,
+  #appareilSearchList,
+  #ustensilesSearchList {
+    -webkit-transform: translate3d(0px, 36px, 0px) !important;
+            transform: translate3d(0px, 36px, 0px) !important;
+    -webkit-column-count: 1;
+            column-count: 1;
+  }
 }
 /*# sourceMappingURL=style.css.map */

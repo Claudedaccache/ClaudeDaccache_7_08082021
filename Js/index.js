@@ -299,9 +299,22 @@ function manageDropdownVisibility(inputContainer, itemList) {
   });
 }
 
-/// empty all containers to be filled by selected recipes ///
+/// empty all containers to be filled by items from selected recipes ///
 function emptyAll() {
   appareilSearchList.innerHTML = "";
   ingredientsSearchList.innerHTML = "";
   ustensilesSearchList.innerHTML = "";
 }
+
+
+/// remove tag from list/// 
+
+xxx("#ingredientsTags", ".closeTag")
+
+function xxx(TagContainer, closingBtn) {
+  let container = document.querySelector(TagContainer);
+  let closeTag = document.querySelectorAll(closingBtn);
+    if (container.length > 0) {
+      console.log(closeTag);
+    }
+  }
