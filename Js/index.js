@@ -238,12 +238,18 @@ function getUniqueItems(MainSearchResult) {
       );
     });
   }
-ccc(MainSearchResult,selectedItemsFromDropdown)
-  function ccc(arr, target){
-    console.log(MainSearchResult);
-    console.log(selectedItemsFromDropdown);
-    console.log(target.every( elt =>{ return arr.includes(elt)}));
 
+  ///filter recipes by selected tags///
+  filteredRecipesBySelectedTags(MainSearchResult, selectedItemsFromDropdown);
+  function filteredRecipesBySelectedTags(MainSearchResult, tagArray) {
+    MainSearchResult.filter((recipe) => {
+      tagArray.forEach((tag) => {
+        console.log(tag);
+        if (recipe.appliance.toLowerCase().includes(tag)) {
+          return recipe;
+        }
+      });
+    });
   }
 }
 
@@ -316,7 +322,6 @@ function emptyAll() {
   ingredientsSearchList.innerHTML = "";
   ustensilesSearchList.innerHTML = "";
 }
-;
 /// remove tag from list///
 function removeTag() {
   let tagContainer = document.querySelector("#searchTags");
@@ -325,13 +330,13 @@ function removeTag() {
     closeTag.forEach((closeBtn) => {
       closeBtn.addEventListener("click", () => {
         closeBtn.parentNode.style.display = "none";
-        let selectedTag= closeBtn.parentNode.dataset.tag
-        var index = selectedItemsFromDropdown.findIndex(function(item) {return item == selectedTag})
-        selectedItemsFromDropdown.splice(index, 1)
+        let selectedTag = closeBtn.parentNode.dataset.tag;
+        var index = selectedItemsFromDropdown.findIndex(function (item) {
+          return item == selectedTag;
+        });
+        selectedItemsFromDropdown.splice(index, 1);
         console.log(selectedItemsFromDropdown);
-
       });
     });
   }
 }
-// console.log(selectedItemsFromDropdown);
