@@ -2,6 +2,8 @@ import data from "../recipes.js";
 import { Recipes } from "./recipes.class.js";
 
 let searchBar = document.querySelector("#mainSearchInput");
+let selectedItemsFromDropdown = [];
+console.log(selectedItemsFromDropdown);
 
 ///display all Recipes (without filter) ///
 displayRecipes("#recipes", data.recipes);
@@ -236,6 +238,13 @@ function getUniqueItems(MainSearchResult) {
       );
     });
   }
+ccc(MainSearchResult,selectedItemsFromDropdown)
+  function ccc(arr, target){
+    console.log(MainSearchResult);
+    console.log(selectedItemsFromDropdown);
+    console.log(target.every( elt =>{ return arr.includes(elt)}));
+
+  }
 }
 
 /// display selected ingredients as a tag ///
@@ -269,13 +278,15 @@ function dropDownSelectedItems(
   recipeElt.forEach((elt) => {
     elt.addEventListener("click", (e) => {
       let targetedItem = e.target.dataset.tag.toLowerCase();
+      selectedItemsFromDropdown.push(targetedItem);
       let itemTagList = document.querySelector(tagContainer);
       itemTagList.innerHTML += `
-            <div class="selectedTag ${itemColorClass} text-white rounded mr-2 rounded">
-            <button type="button" class="${itemTypeClass} close border-0 rounded ${itemColorClass} text-white" aria-label="Close">${targetedItem}
+            <div class="selectedTag ${itemColorClass} text-white rounded mr-2 rounded" data-tag="${targetedItem}">
+            <button type="button" class="${itemTypeClass} close border-0 rounded ${itemColorClass} text-white">${targetedItem}
             </button>
-            <span aria-hidden="true" class="closeTag"><i class="fas fa-times"></i></span>
+            <span aria-hidden="true" aria-label="Close" class="closeTag"><i class="fas fa-times"></i></span>
           </div>`;
+      removeTag();
     });
   });
 }
@@ -305,16 +316,22 @@ function emptyAll() {
   ingredientsSearchList.innerHTML = "";
   ustensilesSearchList.innerHTML = "";
 }
+;
+/// remove tag from list///
+function removeTag() {
+  let tagContainer = document.querySelector("#searchTags");
+  if (tagContainer.hasChildNodes()) {
+    let closeTag = document.querySelectorAll(".closeTag");
+    closeTag.forEach((closeBtn) => {
+      closeBtn.addEventListener("click", () => {
+        closeBtn.parentNode.style.display = "none";
+        let selectedTag= closeBtn.parentNode.dataset.tag
+        var index = selectedItemsFromDropdown.findIndex(function(item) {return item == selectedTag})
+        selectedItemsFromDropdown.splice(index, 1)
+        console.log(selectedItemsFromDropdown);
 
-
-/// remove tag from list/// 
-
-xxx("#ingredientsTags", ".closeTag")
-
-function xxx(TagContainer, closingBtn) {
-  let container = document.querySelector(TagContainer);
-  let closeTag = document.querySelectorAll(closingBtn);
-    if (container.length > 0) {
-      console.log(closeTag);
-    }
+      });
+    });
   }
+}
+// console.log(selectedItemsFromDropdown);
