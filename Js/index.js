@@ -105,6 +105,7 @@ function removeErrorMessage(container) {
   errorMessage.style.display = "none";
 }
 
+
 ///get Ingredients to filter them ///
 function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredients = recipe.ingredients;
