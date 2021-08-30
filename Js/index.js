@@ -2,8 +2,9 @@ import data from "../recipes.js";
 import { Recipes } from "./recipes.class.js";
 
 let searchBar = document.querySelector("#mainSearchInput");
-let selectedItemsFromDropdown = [];
-console.log(selectedItemsFromDropdown);
+let ingTagArray = [];
+let appTagArray = [];
+let ustTagArray = [];
 
 ///display all Recipes (without filter) ///
 displayRecipes("#recipes", data.recipes);
@@ -65,6 +66,24 @@ function filterAllRecipesInMainSearch() {
       displayRecipes("#recipes", data.recipes);
       emptyAll();
       getUniqueItems(data.recipes);
+      dropDownSelectedItems(
+        ".recipeIng",
+        "bg-primary",
+        "ingredientsTagList",
+        "#ingredientsTags"
+      );
+      dropDownSelectedItems(
+        ".recipeApp",
+        "bg-success",
+        "appareilTagList",
+        "#appareilTags"
+      );
+      dropDownSelectedItems(
+        ".recipeUst",
+        "bg-danger",
+        "ustensilTagList",
+        "#ustensilesTags"
+      );
     } else {
       removeErrorMessage(".recipeMessage");
       recipesContainer.childNodes.length > 0
@@ -174,7 +193,7 @@ function getUniqueItems(MainSearchResult) {
           return recipe;
         }
       });
-      emptyAll();
+      ingredientsSearchList.innerHTML = "";
       displayItemsInDropDown(
         ingredientsSearchList,
         filteredByIngredients,
@@ -199,7 +218,8 @@ function getUniqueItems(MainSearchResult) {
           return recipe;
         }
       });
-      emptyAll();
+      appareilSearchList.innerHTML = "";
+
       displayItemsInDropDown(
         appareilSearchList,
         filteredByAppareil,
@@ -224,7 +244,8 @@ function getUniqueItems(MainSearchResult) {
           return recipe;
         }
       });
-      emptyAll();
+      ustensilesSearchList.innerHTML = "";
+
       displayItemsInDropDown(
         ustensilesSearchList,
         filteredByUstensil,
@@ -240,16 +261,13 @@ function getUniqueItems(MainSearchResult) {
   }
 
   ///filter recipes by selected tags///
-  filteredRecipesBySelectedTags(MainSearchResult, selectedItemsFromDropdown);
-  function filteredRecipesBySelectedTags(MainSearchResult, tagArray) {
-    MainSearchResult.filter((recipe) => {
-      tagArray.forEach((tag) => {
-        console.log(tag);
-        if (recipe.appliance.toLowerCase().includes(tag)) {
-          return recipe;
-        }
-      });
-    });
+  filterRecipesBySelectedTags(MainSearchResult, getTags(appTagArray));
+  function filterRecipesBySelectedTags(MainSearchResult, tag) {
+    let xx = MainSearchResult.map((element) =>
+      element.appliance.toLowerCase()
+    ).join(" ");
+    console.log(xx);
+    return xx.includes(tag);
   }
 }
 
@@ -284,7 +302,7 @@ function dropDownSelectedItems(
   recipeElt.forEach((elt) => {
     elt.addEventListener("click", (e) => {
       let targetedItem = e.target.dataset.tag.toLowerCase();
-      selectedItemsFromDropdown.push(targetedItem);
+      pushTagsToArray(tagContainer, targetedItem);
       let itemTagList = document.querySelector(tagContainer);
       itemTagList.innerHTML += `
             <div class="selectedTag ${itemColorClass} text-white rounded mr-2 rounded" data-tag="${targetedItem}">
@@ -292,9 +310,25 @@ function dropDownSelectedItems(
             </button>
             <span aria-hidden="true" aria-label="Close" class="closeTag"><i class="fas fa-times"></i></span>
           </div>`;
-      removeTag();
+      removeTag(ingTagArray);
+      removeTag(appTagArray);
+      removeTag(ustTagArray);
     });
   });
+}
+
+function pushTagsToArray(tagContainer, targetedItem) {
+  switch (tagContainer) {
+    case "#ingredientsTags":
+      ingTagArray.push(targetedItem);
+      break;
+    case "#appareilTags":
+      appTagArray.push(targetedItem);
+      break;
+    case "#ustensilesTags":
+      ustTagArray.push(targetedItem);
+      break;
+  }
 }
 
 /// make visible and invisible the dropdownlist ///
@@ -323,7 +357,7 @@ function emptyAll() {
   ustensilesSearchList.innerHTML = "";
 }
 /// remove tag from list///
-function removeTag() {
+function removeTag(container) {
   let tagContainer = document.querySelector("#searchTags");
   if (tagContainer.hasChildNodes()) {
     let closeTag = document.querySelectorAll(".closeTag");
@@ -331,12 +365,39 @@ function removeTag() {
       closeBtn.addEventListener("click", () => {
         closeBtn.parentNode.style.display = "none";
         let selectedTag = closeBtn.parentNode.dataset.tag;
-        var index = selectedItemsFromDropdown.findIndex(function (item) {
+        var index = container.findIndex(function (item) {
           return item == selectedTag;
         });
-        selectedItemsFromDropdown.splice(index, 1);
-        console.log(selectedItemsFromDropdown);
+        container.splice(index, 1);
+        console.log(container);
       });
     });
+  }
+}
+
+// getTags(appTagArray))
+function getTags(container) {
+  switch (container) {
+    case "ingTagArray":
+      if (ingTagArray.length > 0) {
+        ingTagArray.forEach((tag) => {
+          return tag;
+        });
+      }
+      break;
+    case "appTagArray":
+      if (appTagArray.length > 0) {
+        appTagArray.forEach((tag) => {
+          return tag;
+        });
+      }
+      break;
+    case "ustTagArray":
+      if (ustTagArray.length > 0) {
+        ustTagArray.forEach((tag) => {
+          return tag;
+        });
+      }
+      break;
   }
 }
