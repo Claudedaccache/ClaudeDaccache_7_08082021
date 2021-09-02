@@ -105,7 +105,6 @@ function removeErrorMessage(container) {
   errorMessage.style.display = "none";
 }
 
-
 ///get Ingredients to filter them ///
 function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredients = recipe.ingredients;
@@ -220,7 +219,6 @@ function getUniqueItems(MainSearchResult) {
         }
       });
       appareilSearchList.innerHTML = "";
-
       displayItemsInDropDown(
         appareilSearchList,
         filteredByAppareil,
@@ -246,7 +244,6 @@ function getUniqueItems(MainSearchResult) {
         }
       });
       ustensilesSearchList.innerHTML = "";
-
       displayItemsInDropDown(
         ustensilesSearchList,
         filteredByUstensil,
@@ -262,13 +259,76 @@ function getUniqueItems(MainSearchResult) {
   }
 
   ///filter recipes by selected tags///
-  filterRecipesBySelectedTags(MainSearchResult, getTags(appTagArray));
-  function filterRecipesBySelectedTags(MainSearchResult, tag) {
-    let xx = MainSearchResult.map((element) =>
-      element.appliance.toLowerCase()
-    ).join(" ");
-    console.log(xx);
-    return xx.includes(tag);
+  filterRecipesBySelectedTags(
+    MainSearchResult,
+    "ingredientsTags",
+    getTags("ingTagArray")
+  );
+  filterRecipesBySelectedTags(
+    MainSearchResult,
+    "appareilTags",
+    getTags("appTagArray")
+  );
+  filterRecipesBySelectedTags(
+    MainSearchResult,
+    "ustensilesTags",
+    getTags("ustTagArray")
+  );
+
+  function filterRecipesBySelectedTags(MainSearchResult, component, tag) {
+    switch (component) {
+      case "ingredientsTags":
+        let ing = MainSearchResult.map((element) =>
+          element.ingredients.map((elt) => elt.ingredient)
+        ).join(" ");
+        for (let i = 0, len = ingTagArray.length; i < len; i++) {
+          if (ing.indexOf(ingTagArray[i]) != -1) {
+          console.log(ing);          }
+      }
+        break;
+      case "appareilTags":
+        let app = MainSearchResult.map((element) =>
+          element.appliance.toLowerCase()
+        ).join(" ");
+        console.log(app);
+        // return app.includes(tag);
+        break;
+      case "ustensilesTags":
+        let ust = MainSearchResult.map((element) => element.ustensils).join(
+          " "
+        );
+        console.log(ust);
+        // return ust.includes(tag);
+        break;
+    }
+  }
+}
+
+// function to select each of the tags inside the ingredient, appliance and ustensil arrays///
+
+function getTags(container) {
+  switch (container) {
+    case "ingTagArray":
+      if (ingTagArray.length > 0) {
+        ingTagArray.forEach((tag) => {
+          return (tag);
+        });
+      }
+      break;
+    case "appTagArray":
+      if (appTagArray.length > 0) {
+        appTagArray.forEach((tag) => {
+          console.log(tag);
+        });
+      }
+      break;
+    case "ustTagArray":
+      if (ustTagArray.length > 0) {
+        ustTagArray.forEach((tag) => {
+          console.log(tag);
+        });
+      }
+      break;
   }
 }
 
@@ -314,6 +374,9 @@ function dropDownSelectedItems(
       removeTag(ingTagArray);
       removeTag(appTagArray);
       removeTag(ustTagArray);
+      getTags("ingTagArray");
+      getTags("appTagArray");
+      getTags("ustTagArray");
     });
   });
 }
@@ -373,32 +436,5 @@ function removeTag(container) {
         console.log(container);
       });
     });
-  }
-}
-
-// getTags(appTagArray))
-function getTags(container) {
-  switch (container) {
-    case "ingTagArray":
-      if (ingTagArray.length > 0) {
-        ingTagArray.forEach((tag) => {
-          return tag;
-        });
-      }
-      break;
-    case "appTagArray":
-      if (appTagArray.length > 0) {
-        appTagArray.forEach((tag) => {
-          return tag;
-        });
-      }
-      break;
-    case "ustTagArray":
-      if (ustTagArray.length > 0) {
-        ustTagArray.forEach((tag) => {
-          return tag;
-        });
-      }
-      break;
   }
 }
