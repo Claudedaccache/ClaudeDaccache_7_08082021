@@ -1,16 +1,18 @@
 import data from "../recipes.js";
 import { Recipes } from "./recipes.class.js";
-// import getUniqueItems from "./manageSecondarySearch.js";
 
 let ingTagArray = [];
 let appTagArray = [];
 let ustTagArray = [];
 let allFilteredRecipes = [...data.recipes];
+let arrayIngredients = [];
+let arrayAppareil = [];
+let arrayUstensils = [];
 
 /// calling functions///
 displayRecipes("#recipes", allFilteredRecipes);
 filterAllRecipesInMainSearch();
-getUniqueItems(data.recipes);
+getUniqueItems(allFilteredRecipes);
 dropDownSelectedItems(
   ".recipeIng",
   "bg-primary",
@@ -89,7 +91,7 @@ function removeErrorMessage(container) {
   errorMessage.style.display = "none";
 }
 
-/// get Ingredients to filter them ///
+/// get Ingredients to filter them using a search word or tag ///
 function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredients = recipe.ingredients;
   let ingredientList = ingredients
@@ -98,7 +100,7 @@ function ingredientsUsedInRecipe(ingredient, recipe) {
   return ingredientList.includes(ingredient.toLowerCase());
 }
 
-/// get ustensils to filter them ///
+/// get ustensils to filter them using a search word or tag ///
 function ustensilsUsedInRecipe(ustensil, recipe) {
   let ustensils = recipe.ustensils;
   let ustensilList = ustensils
@@ -107,62 +109,23 @@ function ustensilsUsedInRecipe(ustensil, recipe) {
   return ustensilList.includes(ustensil.toLowerCase());
 }
 
+///display ingredients, appliances and ustensiles in secondary search dropdownList ///
+function displayItemsInDropDown(itemList, filteredItems, itemClass) {
+  filteredItems.forEach(
+    (item) =>
+      (itemList.innerHTML += `<li><a class="${itemClass} dropdown-item text-white" data-tag="${item}" href="#">${item}</a></li>`)
+  );
+}
+
 /// get unique ingredients, appliances and ustensils to display in the secondary dropdown list ///
 function getUniqueItems(MainSearchResult) {
-  /// get unique Ingredients to display in secondary search list ///
-  let arrayIngredients = [];
   getIngredients(MainSearchResult);
-
-  function getIngredients(MainSearchResult) {
-    let ingredientsSet = new Set();
-    MainSearchResult.forEach((dataRecipe) => {
-      dataRecipe.ingredients.map((recipe) =>
-        ingredientsSet.add(recipe.ingredient)
-      );
-    });
-    arrayIngredients = [...ingredientsSet];
-    return arrayIngredients;
-  }
-
-  /// get unique appliances to display in secondary search list ///
-  let arrayAppareil = [];
-
   getAppareil(MainSearchResult);
-
-  function getAppareil(MainSearchResult) {
-    let appareilSet = new Set();
-    MainSearchResult.forEach((dataRecipe) => {
-      appareilSet.add(dataRecipe.appliance);
-    });
-    arrayAppareil = [...appareilSet];
-    return arrayAppareil;
-  }
-
-  /// get unique ustensiles to display in secondary search list ///
-  let arrayUstensils = [];
-
   getUstensiles(MainSearchResult);
 
-  function getUstensiles(MainSearchResult) {
-    let ustensilsSet = new Set();
-    MainSearchResult.forEach((dataRecipe) => {
-      dataRecipe.ustensils.map((ustensil) => ustensilsSet.add(ustensil));
-    });
-    arrayUstensils = [...ustensilsSet];
-    return arrayUstensils;
-  }
-
-  ///display ingredients, appliances andustensiles in secondary search dropdownList ///
   let appareilSearchList = document.querySelector("#appareilSearchList");
   let ingredientsSearchList = document.querySelector("#ingredientsSearchList");
   let ustensilesSearchList = document.querySelector("#ustensilesSearchList");
-
-  function displayItemsInDropDown(itemList, filteredItems, itemClass) {
-    filteredItems.forEach(
-      (item) =>
-        (itemList.innerHTML += `<li><a class="${itemClass} dropdown-item text-white" data-tag="${item}" href="#">${item}</a></li>`)
-    );
-  }
 
   displayItemsInDropDown(ingredientsSearchList, arrayIngredients, "recipeIng");
   displayItemsInDropDown(appareilSearchList, arrayAppareil, "recipeApp");
@@ -245,6 +208,38 @@ function displayRecipesByUstensils(container, arrayUstensils) {
       "#ustensilesTags"
     );
   });
+}
+
+/// get unique Ingredients to display in secondary search list ///
+function getIngredients(MainSearchResult) {
+  let ingredientsSet = new Set();
+  MainSearchResult.forEach((dataRecipe) => {
+    dataRecipe.ingredients.map((recipe) =>
+      ingredientsSet.add(recipe.ingredient)
+    );
+  });
+  arrayIngredients = [...ingredientsSet];
+  return arrayIngredients;
+}
+
+/// get unique appliances to display in secondary search list ///
+function getAppareil(MainSearchResult) {
+  let appareilSet = new Set();
+  MainSearchResult.forEach((dataRecipe) => {
+    appareilSet.add(dataRecipe.appliance);
+  });
+  arrayAppareil = [...appareilSet];
+  return arrayAppareil;
+}
+
+/// get unique ustensiles to display in secondary search list ///
+function getUstensiles(MainSearchResult) {
+  let ustensilsSet = new Set();
+  MainSearchResult.forEach((dataRecipe) => {
+    dataRecipe.ustensils.map((ustensil) => ustensilsSet.add(ustensil));
+  });
+  arrayUstensils = [...ustensilsSet];
+  return arrayUstensils;
 }
 
 /// display selected ingredients as a tag ///
@@ -359,10 +354,10 @@ function removeTag(container, category) {
           container.forEach((tag) => {
             recipesFilteredByTags(category, tag, allFilteredRecipes);
           });
-        } else {
+        }
+        if (container.length == 0) {
           manageAllSecondarySearchContainers(allFilteredRecipes);
         }
-        console.log(container);
       });
     });
   }
@@ -395,7 +390,7 @@ function recipesFilteredByTags(category, tag, data) {
   }
 }
 
-/// filter all recipes in the main search according to the input ///
+/// filter and display all recipes in the main search according to the input ///
 function filterAllRecipesInMainSearch() {
   let recipesContainer = document.querySelector("#recipes");
   let searchBar = document.querySelector("#mainSearchInput");
