@@ -352,7 +352,7 @@ function removeTag(container, category) {
         allFilteredRecipes = [...data.recipes];
         if (container.length > 0) {
           container.forEach((tag) => {
-            recipesFilteredByTags(category, tag, allFilteredRecipes);
+            return recipesFilteredByTags(category, tag, allFilteredRecipes);
           });
         }
         if (container.length == 0) {

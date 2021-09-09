@@ -26,6 +26,7 @@ a {
 #mainSearchInput {
   background-color: #ececec;
   border: none;
+  border-radius: 5px;
 }
 
 #mainSearchInput::-webkit-input-placeholder {
