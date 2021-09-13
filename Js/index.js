@@ -338,27 +338,49 @@ function manageAllSecondarySearchContainers(filteredData) {
 
 /// remove tag from list///
 function removeTag(container, category) {
-  let tagContainer = document.querySelector("#searchTags");
+  let tagContainer = [];
+  switch (category) {
+    case "ingredient":
+      tagContainer = document.querySelector("#ingredientsTags");
+      break;
+    case "appliance":
+      tagContainer = document.querySelector("#appareilTags");
+      break;
+    case "ustensil":
+      tagContainer = document.querySelector("#ustensilesTags");
+      break;
+    default:
+      tagContainer = document.createElement("div");
+  }
   if (tagContainer.hasChildNodes()) {
-    let closeTag = document.querySelectorAll(".closeTag");
+    let closeTag = tagContainer.querySelectorAll(".closeTag");
     closeTag.forEach((closeBtn) => {
-      closeBtn.addEventListener("click", () => {
-        closeBtn.parentNode.style.display = "none";
-        let selectedTag = closeBtn.parentNode.dataset.tag;
+      let clone = closeBtn.cloneNode(true);
+      let eltParentNode = closeBtn.parentNode;
+      eltParentNode.removeChild(closeBtn);
+      eltParentNode.appendChild(clone);
+      clone.addEventListener("click", () => {
+        clone.parentNode.style.display = "none";
+        let selectedTag = clone.parentNode.dataset.tag;
         var index = container.findIndex(function (item) {
           return item == selectedTag;
         });
         container.splice(index, 1);
+        // const mergeResult = [].concat(ingTagArray, appTagArray, ustTagArray);
+        // console.log(mergeResult);
         allFilteredRecipes = [...data.recipes];
+        // if(mergeResult.indexOf(container)){
         if (container.length > 0) {
           container.forEach((tag) => {
-            return recipesFilteredByTags(category, tag, allFilteredRecipes);
+            recipesFilteredByTags(category, tag, allFilteredRecipes);
+
           });
-        }
-        if (container.length == 0) {
+        } else {
           manageAllSecondarySearchContainers(allFilteredRecipes);
         }
+      // }
       });
+      console.log(container);
     });
   }
 }
