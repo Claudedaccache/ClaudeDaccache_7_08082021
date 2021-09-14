@@ -8,6 +8,7 @@ let allFilteredRecipes = [...data.recipes];
 let arrayIngredients = [];
 let arrayAppareil = [];
 let arrayUstensils = [];
+let tagContainer = [];
 
 /// calling functions///
 displayRecipes("#recipes", allFilteredRecipes);
@@ -215,7 +216,7 @@ function getIngredients(MainSearchResult) {
   let ingredientsSet = new Set();
   MainSearchResult.forEach((dataRecipe) => {
     dataRecipe.ingredients.map((recipe) =>
-      ingredientsSet.add(recipe.ingredient)
+      ingredientsSet.add(recipe.ingredient.toLowerCase())
     );
   });
   arrayIngredients = [...ingredientsSet];
@@ -226,7 +227,7 @@ function getIngredients(MainSearchResult) {
 function getAppareil(MainSearchResult) {
   let appareilSet = new Set();
   MainSearchResult.forEach((dataRecipe) => {
-    appareilSet.add(dataRecipe.appliance);
+    appareilSet.add(dataRecipe.appliance.toLowerCase());
   });
   arrayAppareil = [...appareilSet];
   return arrayAppareil;
@@ -236,7 +237,9 @@ function getAppareil(MainSearchResult) {
 function getUstensiles(MainSearchResult) {
   let ustensilsSet = new Set();
   MainSearchResult.forEach((dataRecipe) => {
-    dataRecipe.ustensils.map((ustensil) => ustensilsSet.add(ustensil));
+    dataRecipe.ustensils.map((ustensil) =>
+      ustensilsSet.add(ustensil.toLowerCase())
+    );
   });
   arrayUstensils = [...ustensilsSet];
   return arrayUstensils;
@@ -336,9 +339,8 @@ function manageAllSecondarySearchContainers(filteredData) {
   );
 }
 
-/// remove tag from list///
-function removeTag(container, category) {
-  let tagContainer = [];
+/// manage the switch betwwn the different tags containers ///
+function manageTheSwitchBetweenTagContainer(category) {
   switch (category) {
     case "ingredient":
       tagContainer = document.querySelector("#ingredientsTags");
@@ -352,6 +354,11 @@ function removeTag(container, category) {
     default:
       tagContainer = document.createElement("div");
   }
+}
+
+/// remove tag from list///
+function removeTag(container, category) {
+  manageTheSwitchBetweenTagContainer(category);
   if (tagContainer.hasChildNodes()) {
     let closeTag = tagContainer.querySelectorAll(".closeTag");
     closeTag.forEach((closeBtn) => {
@@ -362,23 +369,27 @@ function removeTag(container, category) {
       clone.addEventListener("click", () => {
         clone.parentNode.style.display = "none";
         let selectedTag = clone.parentNode.dataset.tag;
-        var index = container.findIndex(function (item) {
+        let index = container.findIndex(function (item) {
           return item == selectedTag;
         });
         container.splice(index, 1);
-        // const mergeResult = [].concat(ingTagArray, appTagArray, ustTagArray);
-        // console.log(mergeResult);
-        allFilteredRecipes = [...data.recipes];
-        // if(mergeResult.indexOf(container)){
-        if (container.length > 0) {
-          container.forEach((tag) => {
-            recipesFilteredByTags(category, tag, allFilteredRecipes);
+        console.log(container);
 
-          });
+        allFilteredRecipes = [...data.recipes];
+
+        if (ingTagArray.length > 0 || appTagArray.length > 0 || ustTagArray.length > 0) {
+          ingTagArray.forEach((tag) => {
+            recipesFilteredByTags("ingredient", tag, allFilteredRecipes);
+          }) ||
+          appTagArray.forEach((tag) => {
+            recipesFilteredByTags("appliance", tag, allFilteredRecipes);
+          }) ||
+          ustTagArray.forEach((tag) => {
+            recipesFilteredByTags("ustensil", tag, allFilteredRecipes);
+          }) 
         } else {
           manageAllSecondarySearchContainers(allFilteredRecipes);
         }
-      // }
       });
       console.log(container);
     });
