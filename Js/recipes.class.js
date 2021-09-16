@@ -4,6 +4,7 @@ export class Recipes {
   constructor(elt) {
     this.elt = data.recipes;
     this.name = elt.name;
+    this.id = elt.id;
     this.servings = elt.servings;
     this.time = elt.time;
     this.quantity, this.unit;
@@ -21,7 +22,7 @@ export class Recipes {
   }
 
   displayRecipes(elt) {
-    const repices = ` <div class="col col-lg-4 col-md-6">
+    const repices = ` <div class="col col-lg-4 col-md-6" id="${this.id}">
       <div class="recipeItem card mb-4">
         <img class="card-img-top" src="./image/recipes img.jpg" alt="Card image cap">
         <div class="card-body bg-light">

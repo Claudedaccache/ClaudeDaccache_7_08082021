@@ -9,6 +9,8 @@ let arrayIngredients = [];
 let arrayAppareil = [];
 let arrayUstensils = [];
 let tagContainer = [];
+let uniqueRecipesArray = []
+
 
 /// calling functions///
 displayRecipes("#recipes", allFilteredRecipes);
@@ -45,17 +47,32 @@ function displayRecipes(container, recipes) {
     .join("")}`;
 }
 
+
+///using loop to return only the recipes which include the search input///
+function loopThroughRecipes(data, search) {
+  let uniqueRecipes = new Set()
+ for (let i = 0; i < data.length; i++) {
+    let eltName = data[i].name;
+    let eltDescp = data[i].description;
+    for (let j = 0; j < data[i].ingredients.length; j++) {
+      let eltIng = data[i].ingredients[j].ingredient;
+      if (
+        eltName.toLowerCase().includes(search.toLowerCase()) ||
+        eltDescp.toLowerCase().includes(search.toLowerCase()) ||
+        eltIng.toLowerCase().includes(search.toLowerCase())
+      ) {
+
+        uniqueRecipes.add(data[i]);
+        uniqueRecipesArray = [...uniqueRecipes]
+      }
+    }
+  }
+}
+
 /// filtering recipes in the main seach bar ///
 function recipeFiltered(search, data) {
-  let filteredRecipes = data.filter((recipe) => {
-    if (
-      recipe.name.toLowerCase().includes(search) ||
-      ingredientsUsedInRecipe(search, recipe) ||
-      recipe.description.toLowerCase().includes(search)
-    ) {
-      return recipe;
-    }
-  });
+  loopThroughRecipes(data, search);
+ let filteredRecipes = uniqueRecipesArray
   emptyAll();
   getUniqueItems(filteredRecipes);
   dropDownSelectedItems(
@@ -373,25 +390,27 @@ function removeTag(container, category) {
           return item == selectedTag;
         });
         container.splice(index, 1);
-        console.log(container);
 
         allFilteredRecipes = [...data.recipes];
 
-        if (ingTagArray.length > 0 || appTagArray.length > 0 || ustTagArray.length > 0) {
+        if (
+          ingTagArray.length > 0 ||
+          appTagArray.length > 0 ||
+          ustTagArray.length > 0
+        ) {
           ingTagArray.forEach((tag) => {
             recipesFilteredByTags("ingredient", tag, allFilteredRecipes);
           }) ||
-          appTagArray.forEach((tag) => {
-            recipesFilteredByTags("appliance", tag, allFilteredRecipes);
-          }) ||
-          ustTagArray.forEach((tag) => {
-            recipesFilteredByTags("ustensil", tag, allFilteredRecipes);
-          }) 
+            appTagArray.forEach((tag) => {
+              recipesFilteredByTags("appliance", tag, allFilteredRecipes);
+            }) ||
+            ustTagArray.forEach((tag) => {
+              recipesFilteredByTags("ustensil", tag, allFilteredRecipes);
+            });
         } else {
           manageAllSecondarySearchContainers(allFilteredRecipes);
         }
       });
-      console.log(container);
     });
   }
 }
