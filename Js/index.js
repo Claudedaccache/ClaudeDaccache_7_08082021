@@ -9,8 +9,7 @@ let arrayIngredients = [];
 let arrayAppareil = [];
 let arrayUstensils = [];
 let tagContainer = [];
-let uniqueRecipesArray = []
-
+let uniqueRecipesArray = [];
 
 /// calling functions///
 displayRecipes("#recipes", allFilteredRecipes);
@@ -47,11 +46,10 @@ function displayRecipes(container, recipes) {
     .join("")}`;
 }
 
-
 ///using loop to return only the recipes which include the search input///
 function loopThroughRecipes(data, search) {
-  let uniqueRecipes = new Set()
- for (let i = 0; i < data.length; i++) {
+  let uniqueRecipes = new Set();
+  for (let i = 0; i < data.length; i++) {
     let eltName = data[i].name;
     let eltDescp = data[i].description;
     for (let j = 0; j < data[i].ingredients.length; j++) {
@@ -61,9 +59,8 @@ function loopThroughRecipes(data, search) {
         eltDescp.toLowerCase().includes(search.toLowerCase()) ||
         eltIng.toLowerCase().includes(search.toLowerCase())
       ) {
-
         uniqueRecipes.add(data[i]);
-        uniqueRecipesArray = [...uniqueRecipes]
+        uniqueRecipesArray = [...uniqueRecipes];
       }
     }
   }
@@ -72,7 +69,7 @@ function loopThroughRecipes(data, search) {
 /// filtering recipes in the main seach bar ///
 function recipeFiltered(search, data) {
   loopThroughRecipes(data, search);
- let filteredRecipes = uniqueRecipesArray
+  let filteredRecipes = uniqueRecipesArray;
   emptyAll();
   getUniqueItems(filteredRecipes);
   dropDownSelectedItems(
