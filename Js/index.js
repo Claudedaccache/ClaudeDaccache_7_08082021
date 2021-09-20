@@ -465,7 +465,6 @@ function filterAllRecipesInMainSearch() {
     searchString = e.target.value;
     searchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     if (searchString.value === " " || (searchString.length < 3 && !shorter)) {
-      allFilteredRecipes = [...data.recipes];
       removeErrorMessage(".recipeMessage");
       manageAllSecondarySearchContainers(allFilteredRecipes);
       return 0;
