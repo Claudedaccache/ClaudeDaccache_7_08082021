@@ -450,7 +450,7 @@ function filterAllRecipesInMainSearch() {
     const shorter = e.target.value.length < searchString.length ? true : false;
     searchString = e.target.value;
     searchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
-    if (searchString.value === " " || (searchString.length < 3 && !shorter)) {
+    if (searchString == " " || (searchString.length < 3 && !shorter)) {
       removeErrorMessage(".recipeMessage");
       manageAllSecondarySearchContainers(allFilteredRecipes);
       return 0;
