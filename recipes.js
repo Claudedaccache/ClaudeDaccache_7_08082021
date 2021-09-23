@@ -1012,7 +1012,7 @@ export default {
           unit: "grammes",
         },
         {
-          ingredient: "Crême fraîche",
+          ingredient: "Crème fraîche",
           quantity: 10,
           unit: "cl",
         },
