@@ -56,9 +56,9 @@ function loopThroughRecipes(data, search) {
     for (let j = 0; j < data[i].ingredients.length; j++) {
       let eltIng = data[i].ingredients[j].ingredient;
       if (
-        eltName.toLowerCase().includes(search.toLowerCase()) ||
-        eltDescp.toLowerCase().includes(search.toLowerCase()) ||
-        eltIng.toLowerCase().includes(search.toLowerCase())
+        eltName.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(search.toLowerCase()) ||
+        eltDescp.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(search.toLowerCase()) ||
+        eltIng.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(search.toLowerCase())
       ) {
         uniqueRecipes.add(data[i]);
         uniqueRecipesArray = [...uniqueRecipes];
@@ -111,18 +111,18 @@ function removeErrorMessage(container) {
 function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredients = recipe.ingredients;
   let ingredientList = ingredients
-    .map((element) => element.ingredient.toLowerCase())
+    .map((element) => element.ingredient.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""))
     .join(" ");
-  return ingredientList.includes(ingredient.toLowerCase());
+  return ingredientList.includes(ingredient.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""));
 }
 
 /// get ustensils to filter them using a search word or tag ///
 function ustensilsUsedInRecipe(ustensil, recipe) {
   let ustensils = recipe.ustensils;
   let ustensilList = ustensils
-    .map((element) => element.toLowerCase())
+    .map((element) => element.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""))
     .join(" ");
-  return ustensilList.includes(ustensil.toLowerCase());
+  return ustensilList.includes(ustensil.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""));
 }
 
 ///display ingredients, appliances and ustensiles in secondary search dropdownList ///
@@ -420,7 +420,7 @@ function recipesFilteredByTags(category, tag, data) {
       break;
     case "appliance":
       let recipesApp = data.filter((recipe) => {
-        return recipe.appliance.toLowerCase().includes(tag.toLowerCase());
+        return recipe.appliance.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(tag.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, ""));
       });
       allFilteredRecipes = [...recipesApp];
       manageAllSecondarySearchContainers(allFilteredRecipes);
