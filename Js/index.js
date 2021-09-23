@@ -46,13 +46,14 @@ function displayRecipes(container, recipes) {
     .join("")}`;
 }
 
+
 /// filtering recipes in the main seach bar ///
 function recipeFiltered(search, data) {
   let filteredRecipes = data.filter((recipe) => {
     if (
-      recipe.name.toLowerCase().includes(search) ||
+      recipe.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(search) ||
       ingredientsUsedInRecipe(search, recipe) ||
-      recipe.description.toLowerCase().includes(search)
+      recipe.description.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(search)
     ) {
       return recipe;
     }
@@ -97,7 +98,7 @@ function removeErrorMessage(container) {
 function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredients = recipe.ingredients;
   let ingredientList = ingredients
-    .map((element) => element.ingredient.toLowerCase())
+    .map((element) => element.ingredient.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase())
     .join(" ");
   return ingredientList.includes(ingredient.toLowerCase());
 }
@@ -106,7 +107,7 @@ function ingredientsUsedInRecipe(ingredient, recipe) {
 function ustensilsUsedInRecipe(ustensil, recipe) {
   let ustensils = recipe.ustensils;
   let ustensilList = ustensils
-    .map((element) => element.toLowerCase())
+    .map((element) => element.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase())
     .join(" ");
   return ustensilList.includes(ustensil.toLowerCase());
 }
