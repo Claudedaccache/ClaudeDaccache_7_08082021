@@ -100,7 +100,7 @@ function ingredientsUsedInRecipe(ingredient, recipe) {
   let ingredientList = ingredients
     .map((element) => element.ingredient.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase())
     .join(" ");
-  return ingredientList.includes(ingredient.toLowerCase());
+  return ingredientList.includes(ingredient.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase());
 }
 
 /// get ustensils to filter them using a search word or tag ///
@@ -109,7 +109,7 @@ function ustensilsUsedInRecipe(ustensil, recipe) {
   let ustensilList = ustensils
     .map((element) => element.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase())
     .join(" ");
-  return ustensilList.includes(ustensil.toLowerCase());
+  return ustensilList.includes(ustensil.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase());
 }
 
 ///display ingredients, appliances and ustensiles in secondary search dropdownList ///
@@ -146,7 +146,7 @@ function displayRecipesByIngredients(container, arrayIngredients) {
     manageDropdownVisibility("#ingredients", "#ingredientsSearchList");
     let ingSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByIngredients = arrayIngredients.filter((recipe) => {
-      if (recipe.toLowerCase().includes(ingSearchString)) {
+      if (recipe.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(ingSearchString)) {
         return recipe;
       }
     });
@@ -172,7 +172,7 @@ function displayRecipesByAppareil(container, arrayAppareil) {
     manageDropdownVisibility("#appareil", "#appareilSearchList");
     let appSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByAppareil = arrayAppareil.filter((recipe) => {
-      if (recipe.toLowerCase().includes(appSearchString)) {
+      if (recipe.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(appSearchString)) {
         return recipe;
       }
     });
@@ -194,7 +194,7 @@ function displayRecipesByUstensils(container, arrayUstensils) {
     manageDropdownVisibility("#ustensiles", "#ustensilesSearchList");
     let ustSearchString = e.target.value.toLowerCase().replace(/( )+/g, " ");
     let filteredByUstensil = arrayUstensils.filter((recipe) => {
-      if (recipe.toLowerCase().includes(ustSearchString)) {
+      if (recipe.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(ustSearchString)) {
         return recipe;
       }
     });
@@ -407,7 +407,7 @@ function recipesFilteredByTags(category, tag, data) {
       break;
     case "appliance":
       let recipesApp = data.filter((recipe) => {
-        return recipe.appliance.toLowerCase().includes(tag.toLowerCase());
+        return recipe.appliance.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").includes(tag.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase());
       });
       allFilteredRecipes = [...recipesApp];
       manageAllSecondarySearchContainers(allFilteredRecipes);
