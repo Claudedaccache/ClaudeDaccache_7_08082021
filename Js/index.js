@@ -11,6 +11,9 @@ let arrayUstensils = [];
 let tagContainer = [];
 let uniqueRecipesArray = [];
 let searchString = "";
+let appareilSearchList = document.querySelector("#appareilSearchList");
+let ingredientsSearchList = document.querySelector("#ingredientsSearchList");
+let ustensilesSearchList = document.querySelector("#ustensilesSearchList");
 
 /// calling functions///
 displayRecipes("#recipes", allFilteredRecipes);
@@ -138,10 +141,6 @@ function getUniqueItems(MainSearchResult) {
   getIngredients(MainSearchResult);
   getAppareil(MainSearchResult);
   getUstensiles(MainSearchResult);
-
-  let appareilSearchList = document.querySelector("#appareilSearchList");
-  let ingredientsSearchList = document.querySelector("#ingredientsSearchList");
-  let ustensilesSearchList = document.querySelector("#ustensilesSearchList");
 
   displayItemsInDropDown(ingredientsSearchList, arrayIngredients, "recipeIng");
   displayItemsInDropDown(appareilSearchList, arrayAppareil, "recipeApp");
@@ -282,6 +281,9 @@ function dropDownSelectedItems(
       removeTag(ingTagArray, "ingredient");
       removeTag(appTagArray, "appliance");
       removeTag(ustTagArray, "ustensil");
+      ingredientsSearchList.style.display=""
+      appareilSearchList.style.display=""
+      ustensilesSearchList.style.display=""
     });
   });
 }
