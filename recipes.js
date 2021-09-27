@@ -61,7 +61,7 @@ export default {
           quantity: 5,
         },
         {
-          ingredient: "Lait de Coco",
+          ingredient: "Lait de coco",
           quantity: 100,
           unit: "ml",
         },
@@ -168,7 +168,7 @@ export default {
           quantity: 2,
         },
         {
-          ingredient: "Crème fraiche",
+          ingredient: "Crème fraîche",
           quantity: 2,
           unit: "cuillères à soupe",
         },
@@ -207,7 +207,7 @@ export default {
           quantity: "2",
         },
         {
-          ingredient: "Crème fraiche",
+          ingredient: "Crème fraîche",
           quantity: 25,
           unit: "cl",
         },
@@ -333,7 +333,7 @@ export default {
       ],
       time: 15,
       description:
-        "Peler le concombre le couper 2, retirer les pépins. Couper les olives en morceaux, ainsi que le fromage de chèvre. Ajouter le basilic ainsi que le vinaigre balsamic et l'huile d'olives à votre gout.",
+        "Peler le concombre le couper 2, retirer les pépins. Couper les olives en morceaux, ainsi que le fromage de chèvre. Ajouter le basilic ainsi que le vinaigre balsamic et l'huile d'olive à votre gout.",
       appliance: "Saladier",
       ustensils: ["cuillère en bois", "couteau"],
     },
@@ -585,7 +585,7 @@ export default {
           unit: "tiges",
         },
         {
-          ingredient: "huile d'olives",
+          ingredient: "huile d'olive",
           quantity: 2,
           unit: "cuillère à soupe",
         },
@@ -705,7 +705,7 @@ export default {
           unit: "grammes",
         },
         {
-          ingredient: "Crème fraiche",
+          ingredient: "Crème fraîche",
           quantity: 200,
           unit: "grammes",
         },
@@ -756,15 +756,15 @@ export default {
           unit: "cl",
         },
         {
-          ingredient: "Crème Fraiche",
+          ingredient: "Crème fraîche",
           quantity: 1,
           unit: "cuillères à soupe",
         },
       ],
       time: 30,
       description:
-        "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Serivir.",
-      appliance: "Casserolle.",
+        "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Serivir.",
+      appliance: "Casserolle",
       ustensils: ["Cuillère en bois", "louche", "couteau"],
     },
     {
@@ -934,7 +934,7 @@ export default {
           quantity: 1,
         },
         {
-          ingredient: "Huile d'olives",
+          ingredient: "Huile d'olive",
         },
         {
           ingredient: "Oignon",
@@ -1012,7 +1012,7 @@ export default {
           unit: "grammes",
         },
         {
-          ingredient: "Crême fraîche",
+          ingredient: "Crème fraîche",
           quantity: 10,
           unit: "cl",
         },
@@ -1318,7 +1318,7 @@ export default {
           unit: "grammes",
         },
         {
-          ingredient: "Huile d'olives",
+          ingredient: "Huile d'olive",
           quantity: 25,
           unit: "cl",
         },
@@ -1663,7 +1663,7 @@ export default {
       ],
       time: 5,
       description:
-        "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraiche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir",
+        "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraîche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir",
       appliance: "Saladier",
       ustensils: ["fouet", "verres", "cuillère en bois"],
     },

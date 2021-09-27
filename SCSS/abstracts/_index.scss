@@ -3,6 +3,7 @@
 #mainSearchInput {
   background-color: rgb(236, 236, 236);
   border: none;
+  border-radius: 5px;
 }
 
 #mainSearchInput::placeholder {
@@ -69,11 +70,17 @@
   margin-right: 1rem;
 }
 
+#ingredientsSearch:focus-within,
+#appareilSearch:focus-within,
+#ustensilesSearch:focus-within {
+  width: 30rem;
+}
+
 #ingredientsSearchList,
 #appareilSearchList,
 #ustensilesSearchList {
   transform: translate3d(0px, 36px, 0px) !important;
-  column-count: auto;
+  column-count: 3;
 }
 
 #ingredients::placeholder,
@@ -82,7 +89,13 @@
   color: white;
   opacity: 1;
 }
-
+.dropdown-menu li, .dropdown-menu li a {
+  white-space: normal;
+  float: left;
+  width: 100%;
+  height: auto;
+  word-wrap: break-word;
+}
 
 /// recipes section ///
 
