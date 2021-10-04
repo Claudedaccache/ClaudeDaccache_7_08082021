@@ -221,6 +221,10 @@ function getIngredients(MainSearchResult) {
     );
   });
   arrayIngredients = [...ingredientsSet];
+  ingTagArray.forEach((tag) => {
+    let index = arrayIngredients.findIndex(elt => elt === tag)
+    arrayIngredients.splice(index,1)
+  })
   return arrayIngredients;
 }
 
