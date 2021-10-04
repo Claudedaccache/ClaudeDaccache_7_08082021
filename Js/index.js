@@ -235,6 +235,10 @@ function getAppareil(MainSearchResult) {
     appareilSet.add(dataRecipe.appliance.toLowerCase());
   });
   arrayAppareil = [...appareilSet];
+  appTagArray.forEach((tag) => {
+    let index = arrayAppareil.findIndex(elt => elt === tag)
+    arrayAppareil.splice(index,1)
+  })
   return arrayAppareil;
 }
 
@@ -247,6 +251,10 @@ function getUstensiles(MainSearchResult) {
     );
   });
   arrayUstensils = [...ustensilsSet];
+  ustTagArray.forEach((tag) => {
+    let index = arrayUstensils.findIndex(elt => elt === tag)
+    arrayUstensils.splice(index,1)
+  })
   return arrayUstensils;
 }
 
